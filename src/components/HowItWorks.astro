@@ -1,0 +1,85 @@
+---
+// Genuinely sequential 3-step flow — numbers earn their place here.
+const steps = [
+  {
+    n: "1", title: "Connect your inbox",
+    body: "Link Instagram, WhatsApp, Messenger, or SMS in a couple of clicks. No code, no developer, no rewiring your stack.",
+  },
+  {
+    n: "2", title: "The AI learns your offer",
+    body: "Paste your website or pricing. DMClosed studies your offer, your tone, and your objections, then writes itself a playbook.",
+  },
+  {
+    n: "3", title: "Calls land on your calendar",
+    body: "It replies, qualifies, handles pushback, follows up for days, and books the call. You show up and close.",
+  },
+];
+---
+<section class="how section" id="how" aria-labelledby="how-h">
+  <div class="container">
+    <header class="how-head">
+      <p class="eyebrow reveal">From DM to booked call</p>
+      <h2 id="how-h" class="reveal">Live in fifteen minutes. Closing by tonight.</h2>
+    </header>
+
+    <ol class="how-steps">
+      {steps.map((s) => (
+        <li class="how-step reveal">
+          <div class="how-num" aria-hidden="true">
+            <span>{s.n}</span>
+            <svg class="how-ring" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" /></svg>
+          </div>
+          <h3 class="how-title">{s.title}</h3>
+          <p class="how-body">{s.body}</p>
+        </li>
+      ))}
+      <span class="how-track" aria-hidden="true"><span class="how-track-fill" data-track-fill></span></span>
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how-head { text-align: center; margin-bottom: clamp(2.5rem, 1rem + 5vw, 4.5rem); }
+  .how-head h2 { font-size: var(--step-3); margin-top: 0.8rem; }
+
+  .how-steps {
+    position: relative;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 0.5rem + 3vw, 3.5rem);
+  }
+  .how-track {
+    position: absolute; top: 32px; left: 12%; right: 12%; height: 2px;
+    background: var(--line); z-index: 0; transform-origin: left;
+  }
+  .how-track-fill {
+    position: absolute; inset: 0; width: 0;
+    background: linear-gradient(90deg, var(--primary-strong), var(--accent-strong));
+    box-shadow: 0 0 12px var(--glow-cyan);
+  }
+  .how-step { position: relative; z-index: 1; text-align: center; }
+  .how-num {
+    position: relative; width: 64px; height: 64px; margin: 0 auto 1.4rem;
+    display: grid; place-items: center;
+  }
+  .how-num span {
+    font-family: var(--font-display); font-weight: 800; font-size: 1.7rem;
+    color: var(--ink); z-index: 1;
+    width: 64px; height: 64px; display: grid; place-items: center;
+    background: var(--surface); border-radius: 50%; border: 1px solid var(--line);
+  }
+  .how-ring { position: absolute; inset: 0; width: 64px; height: 64px; transform: rotate(-90deg); }
+  .how-ring circle {
+    fill: none; stroke: var(--primary-strong); stroke-width: 2.5;
+    stroke-dasharray: 188.5; stroke-dashoffset: 188.5;
+    transition: stroke-dashoffset 1s var(--ease-out-expo);
+    filter: drop-shadow(0 0 6px var(--glow-indigo));
+  }
+  .how-step.is-in .how-ring circle { stroke-dashoffset: 0; }
+  .how-title { font-size: var(--step-1); margin-bottom: 0.6rem; }
+  .how-body { color: var(--ink-2); max-width: 32ch; margin-inline: auto; line-height: 1.55; }
+
+  @media (max-width: 760px) {
+    .how-steps { grid-template-columns: 1fr; gap: 2.5rem; }
+    .how-track { display: none; }
+  }
+</style>

@@ -1,0 +1,56 @@
+---
+const faqs = [
+  { q: "Will it sound like a robot to my leads?", a: "No. DMClosed replies in natural, human phrasing, breaks messages into chunks instead of walls of text, and adapts its tone to your brand. Most leads never realize they are talking to an AI." },
+  { q: "How long does setup actually take?", a: "About fifteen minutes. You connect an inbox, paste your website or pricing so the AI learns your offer, and turn it on. No developer, no code, no complicated integration." },
+  { q: "What happens during the 7-day trial?", a: "You get full access with no credit card. Connect your real inbox and let the AI handle live conversations. You watch it qualify leads and book calls before you decide to pay." },
+  { q: "Can it really close high-ticket deals?", a: "Yes. It has handled objection-heavy conversations on deals from $27 products up to $40,000+ services, holding price and following up for weeks without a human stepping in." },
+  { q: "Do I keep control of the conversations?", a: "Always. You can read every thread, jump in any time, and set rules for when the AI should hand a conversation to you. It works for you, not around you." },
+  { q: "Which channels does it cover?", a: "Instagram DMs and comments, WhatsApp, Facebook Messenger, SMS, and web chat, all from one inbox with shared memory across every channel." },
+];
+---
+<section class="faq section" aria-labelledby="faq-h">
+  <div class="container-narrow">
+    <header class="faq-head">
+      <p class="eyebrow reveal">Before you ask</p>
+      <h2 id="faq-h" class="reveal">The questions everyone has.</h2>
+    </header>
+    <div class="faq-list">
+      {faqs.map((f, i) => (
+        <details class="faq-item reveal" name="faq" {...(i === 0 ? { open: true } : {})}>
+          <summary>
+            <span class="faq-q">{f.q}</span>
+            <span class="faq-ic" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M3 6 8 11 13 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </summary>
+          <div class="faq-a"><p>{f.a}</p></div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-head { text-align: center; margin-bottom: clamp(2rem, 1rem + 3vw, 3.5rem); }
+  .faq-head h2 { font-size: var(--step-3); margin-top: 0.8rem; }
+
+  .faq-list { display: flex; flex-direction: column; gap: 0.7rem; }
+  .faq-item {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; transition: border-color var(--dur-fast), background var(--dur-fast);
+  }
+  .faq-item[open] { border-color: var(--primary-dim); background: var(--surface-2); }
+  .faq-item summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 1.15rem 1.3rem; cursor: pointer; list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-q { font-family: var(--font-display); font-weight: 600; font-size: var(--step-1); letter-spacing: -0.01em; }
+  .faq-ic { flex-shrink: 0; width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: var(--surface-hi); color: var(--accent-strong); transition: transform var(--dur-fast) var(--ease-out-quart); }
+  .faq-item[open] .faq-ic { transform: rotate(180deg); }
+  .faq-a { padding: 0 1.3rem 1.25rem; }
+  .faq-a p { color: var(--ink-2); line-height: 1.6; max-width: 64ch; }
+
+  /* gentle open animation */
+  html.has-motion .faq-item[open] .faq-a { animation: faqOpen 0.4s var(--ease-out-expo); }
+  @keyframes faqOpen { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { html.has-motion .faq-item[open] .faq-a { animation: none; } }
+</style>

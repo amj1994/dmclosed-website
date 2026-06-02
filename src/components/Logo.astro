@@ -1,0 +1,18 @@
+---
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<a href="/" class={`logo ${compact ? "is-compact" : ""}`} aria-label="DMClosed home">
+  <img src="/logo.png" alt="DMClosed" width="1307" height="402" decoding="async" />
+</a>
+<style>
+  .logo { display: inline-flex; align-items: center; }
+  .logo img {
+    height: 46px; width: auto;
+    filter: drop-shadow(0 4px 14px var(--glow-soft));
+  }
+  .logo.is-compact img { height: 40px; }
+  @media (max-width: 520px) {
+    .logo img { height: 38px; }
+  }
+</style>

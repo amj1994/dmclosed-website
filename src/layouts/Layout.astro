@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "DMClosed — The AI that closes deals in your DMs",
+  description = "DMClosed is an AI sales agent that lives in your Instagram, WhatsApp, and SMS. It replies in seconds, handles objections for days, and books calls on your calendar. 24/7. Start a 7-day free trial.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="DMClosed" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <meta name="theme-color" content="#0a0a16" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- JSON-LD: SaaS product -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "DMClosed",
+      "applicationCategory": "BusinessApplication",
+      "description": description,
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "7-day free trial" }
+    })} />
+
+    <script is:inline>
+      // Mark motion-capable before paint so reveals only hide when we can animate them.
+      (function () {
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduce) document.documentElement.classList.add("has-motion");
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <slot />
+    <style>
+      .skip-link {
+        position: absolute; left: 1rem; top: -3rem;
+        background: var(--primary); color: var(--on-primary);
+        padding: 0.6rem 1rem; border-radius: 8px; z-index: var(--z-toast);
+        transition: top var(--dur-fast) var(--ease-out-quart);
+      }
+      .skip-link:focus { top: 1rem; }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+---
+const channels = [
+  { name: "Instagram", note: "DMs + comment-to-DM on posts and reels", key: "ig" },
+  { name: "WhatsApp", note: "Personal and Business API numbers", key: "wa" },
+  { name: "SMS", note: "Text leads back the second they opt in", key: "sms" },
+  { name: "Messenger", note: "Facebook page inbox, fully automated", key: "fb" },
+];
+---
+<section class="channels section" aria-labelledby="ch-h">
+  <div class="container">
+    <header class="ch-head">
+      <p class="eyebrow reveal">Wherever they message you</p>
+      <h2 id="ch-h" class="reveal">One AI. Every inbox your leads use.</h2>
+      <p class="ch-sub reveal">Your leads do not all live in one app. DMClosed works across the channels where buying conversations actually happen, all from a single brain that remembers every contact.</p>
+    </header>
+
+    <ul class="ch-grid">
+      {channels.map((c) => (
+        <li class="ch-card reveal" data-tilt>
+          <span class={`ch-ic ch-${c.key}`} aria-hidden="true">
+            {c.key === "ig" && <svg viewBox="0 0 24 24" width="26" height="26"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>}
+            {c.key === "wa" && <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.4A10 10 0 1 0 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5l.8 1.8c0 .2 0 .4-.1.5l-.5.6c-.1.2-.2.3 0 .6a6 6 0 0 0 2.7 2.4c.3.1.4 0 .6-.1l.7-.8c.2-.2.3-.1.5-.1l1.8.9c.2.1.4.2.4.3.1.5-.1 1.4-.5 1.7-.4.3-1.2.7-1.9.5a8.6 8.6 0 0 1-6.3-6.2c-.1-.7 0-1.4.2-1.8Z" fill="currentColor"/></svg>}
+            {c.key === "sms" && <svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 5h16v11H8l-4 3V5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>}
+            {c.key === "fb" && <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m7 13 3-3.2 2.3 1.8L15 9l-2.7 3.2-2.3-1.8L7 13Z" fill="currentColor"/></svg>}
+          </span>
+          <h3 class="ch-name">{c.name}</h3>
+          <p class="ch-note">{c.note}</p>
+          <span class="ch-live"><span class="ch-live-dot"></span> Connected</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .ch-head { text-align: center; margin-bottom: clamp(2.5rem, 1rem + 4vw, 4rem); }
+  .ch-head h2 { font-size: var(--step-3); margin: 0.8rem 0 1rem; }
+  .ch-sub { color: var(--ink-2); font-size: var(--step-1); max-width: 56ch; margin-inline: auto; line-height: 1.55; }
+
+  .ch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  @media (max-width: 900px) { .ch-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 460px) { .ch-grid { grid-template-columns: 1fr; } }
+  .ch-card {
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line); border-radius: var(--radius-lg);
+    padding: 1.6rem 1.4rem;
+    transition: transform var(--dur-fast) var(--ease-out-quart), border-color var(--dur-fast), box-shadow var(--dur-fast);
+  }
+  .ch-card:hover { transform: translateY(-6px); border-color: var(--primary-dim); box-shadow: 0 24px 50px -24px var(--glow-indigo); }
+  .ch-ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 1.1rem; color: var(--on-primary); }
+  .ch-ig { background: linear-gradient(135deg, #b537d6, #fd5d2c); }
+  .ch-wa { background: linear-gradient(135deg, #1faa55, #25d366); }
+  .ch-sms { background: linear-gradient(135deg, var(--primary-strong), var(--accent-strong)); }
+  .ch-fb { background: linear-gradient(135deg, #1f6bff, #0a4bd6); }
+  .ch-name { font-size: var(--step-1); margin-bottom: 0.4rem; }
+  .ch-note { color: var(--ink-2); font-size: 0.92rem; line-height: 1.5; margin-bottom: 1.1rem; min-height: 2.8em; }
+  .ch-live { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 600; color: var(--success); }
+  .ch-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 0 var(--success); animation: chpulse 2.6s infinite; }
+  @keyframes chpulse { 0%{box-shadow:0 0 0 0 oklch(0.74 0.17 150 / 0.6)} 70%{box-shadow:0 0 0 6px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+  @media (prefers-reduced-motion: reduce) { .ch-live-dot { animation: none; } }
+</style>

@@ -1,0 +1,112 @@
+---
+// The $40K FueGenix story — real conversation beats, rendered as proof.
+const beats = [
+  { from: "lead", text: "If I do this it'd only be with Dr. Munib. But $40k is just not something I can manage.", tag: "Out of budget" },
+  { from: "ai",   text: "I understand. Dr. Munib's results come at a premium. If your budget changes, the door is always open. Wishing you the best." , tag: "AI holds the line" },
+  { from: "sys",  text: "Chat window closed · 24h no reply" },
+  { from: "lead", text: "Hi, I'd like to learn more. I sent a message a few days ago about prices. Have another question.", tag: "Returns · 4 days later" },
+  { from: "ai",   text: "Great to hear from you again. What would you like to know?", tag: "Picks up instantly" },
+  { from: "lead", text: "I completed the payment. Will await response to schedule the consultation.", tag: "Paid · $1,000 deposit" },
+];
+const stats = [
+  { v: "40", suffix: "K", label: "Deal size, in dollars", count: true },
+  { v: "14", suffix: "", label: "Days to first payment", count: true },
+  { v: "0", suffix: "", label: "Human messages sent", count: true },
+];
+---
+<section class="proof section" id="proof" aria-labelledby="proof-h">
+  <div class="proof-bg" aria-hidden="true"></div>
+  <div class="container proof-grid">
+    <div class="proof-copy">
+      <p class="eyebrow reveal">A real conversation, start to finish</p>
+      <h2 id="proof-h" class="reveal">
+        It turned <span class="hl">“out of budget”</span> into a $40,000 customer.
+      </h2>
+      <p class="proof-lead reveal">
+        A hair-transplant clinic kept losing high-value leads in the DMs.
+        DMClosed held the price, kept the door open, and stayed patient.
+        The prospect came back on his own and paid. No human touched the chat.
+      </p>
+      <dl class="proof-stats reveal">
+        {stats.map((s) => (
+          <div class="proof-stat">
+            <dt class="proof-stat-v">
+              {s.count
+                ? <span data-count data-to={s.v} data-suffix={s.suffix}>{s.v}{s.suffix}</span>
+                : <span>{s.v}{s.suffix}</span>}
+              {s.suffix === "K" ? "" : ""}
+            </dt>
+            <dd class="proof-stat-l">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <div class="proof-thread reveal" data-proof-thread>
+      {beats.map((b, i) => (
+        b.from === "sys" ? (
+          <div class="beat-sys" data-beat data-i={i}><span>{b.text}</span></div>
+        ) : (
+          <div class={`beat beat-${b.from}`} data-beat data-i={i}>
+            {b.tag && <span class={`beat-tag ${b.from === "lead" ? "tag-lead" : "tag-ai"}`}>{b.tag}</span>}
+            <p>{b.text}</p>
+          </div>
+        )
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proof { position: relative; overflow: clip; }
+  .proof-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(60% 50% at 85% 20%, var(--glow-soft), transparent 70%),
+      radial-gradient(50% 40% at 10% 90%, var(--glow-cyan), transparent 70%);
+    opacity: 0.5; pointer-events: none;
+  }
+  .proof-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: center;
+  }
+  .proof-copy h2 { font-size: var(--step-3); margin: 0.8rem 0 1.4rem; }
+  .proof-copy h2 .hl { color: var(--accent-hi); }
+  .proof-lead { font-size: var(--step-1); color: var(--ink-2); line-height: 1.55; max-width: 42ch; }
+
+  .proof-stats { display: flex; flex-wrap: wrap; gap: 2.2rem; margin-top: 2.2rem; }
+  .proof-stat-v {
+    font-family: var(--font-display); font-weight: 800; font-size: var(--step-3);
+    color: var(--primary-hi); line-height: 1; font-variant-numeric: tabular-nums;
+  }
+  .proof-stat-l { font-size: var(--step--1); color: var(--muted); margin-top: 0.3rem; max-width: 14ch; }
+
+  .proof-thread {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.4rem;
+    display: flex; flex-direction: column; gap: 0.85rem;
+    box-shadow: var(--shadow-lg);
+  }
+  .beat { max-width: 88%; padding: 0.8rem 1rem; border-radius: 16px; position: relative; }
+  .beat p { font-size: 0.95rem; line-height: 1.45; }
+  .beat-lead { align-self: flex-start; background: var(--surface-hi); border-bottom-left-radius: 5px; }
+  .beat-ai { align-self: flex-end; background: linear-gradient(135deg, var(--primary), var(--primary-dim)); color: var(--on-primary); border-bottom-right-radius: 5px; }
+  .beat-tag {
+    display: inline-block; font-family: var(--font-body); font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .tag-lead { color: var(--accent-hi); }
+  .tag-ai { color: oklch(0.92 0.05 210); }
+  .beat-sys { align-self: center; }
+  .beat-sys span {
+    font-size: 0.72rem; color: var(--muted); padding: 0.3rem 0.8rem;
+    border: 1px dashed var(--line); border-radius: var(--radius-pill);
+  }
+
+  @media (max-width: 860px) {
+    .proof-grid { grid-template-columns: 1fr; }
+  }
+</style>

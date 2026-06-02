@@ -1,0 +1,34 @@
+---
+---
+<section class="cta section" aria-labelledby="cta-h">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="container-narrow cta-inner">
+    <p class="eyebrow reveal">Your DMs are open right now</p>
+    <h2 id="cta-h" class="cta-h reveal">There are leads in your inbox<br />going cold as you read this.</h2>
+    <p class="cta-sub reveal">Put a closer in there tonight. Connect your inbox, start the 7-day trial, and let DMClosed turn the conversations you are missing into calls on your calendar.</p>
+    <div class="cta-actions reveal">
+      <a href="#pricing" class="btn btn-primary btn-lg">Start 7-day free trial</a>
+      <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+    </div>
+    <p class="cta-fine reveal">No credit card · live in 15 minutes · cancel anytime</p>
+  </div>
+</section>
+
+<style>
+  .cta { position: relative; overflow: clip; text-align: center; }
+  .cta-glow {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(50% 60% at 50% 50%, var(--glow-indigo), transparent 70%),
+      radial-gradient(40% 40% at 20% 80%, var(--glow-cyan), transparent 70%);
+    opacity: 0.55;
+    animation: ctaPulse 9s ease-in-out infinite;
+  }
+  @keyframes ctaPulse { 0%,100%{opacity:0.45; transform:scale(1)} 50%{opacity:0.65; transform:scale(1.05)} }
+  .cta-inner { position: relative; z-index: 1; }
+  .cta-h { font-size: var(--step-4); margin: 0.9rem 0 1.3rem; }
+  .cta-sub { font-size: var(--step-1); color: var(--ink-2); max-width: 52ch; margin: 0 auto 2rem; line-height: 1.55; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; margin-bottom: 1.4rem; }
+  .cta-fine { color: var(--muted); font-size: var(--step--1); }
+  @media (prefers-reduced-motion: reduce) { .cta-glow { animation: none; } }
+</style>

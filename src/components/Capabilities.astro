@@ -1,0 +1,109 @@
+---
+// Alternating capability rows — each one shows the AI doing the thing.
+---
+<section class="caps section" aria-labelledby="caps-h">
+  <div class="container">
+    <header class="caps-head">
+      <p class="eyebrow reveal">Not a chatbot. A closer.</p>
+      <h2 id="caps-h" class="reveal">Chatbots answer questions.<br />DMClosed closes deals.</h2>
+    </header>
+
+    <div class="caps-rows">
+      <!-- Row 1: handles objections -->
+      <article class="cap reveal">
+        <div class="cap-copy">
+          <h3>It handles the objection you hate</h3>
+          <p>“Too expensive,” “need to think,” “send me info.” DMClosed answers every stall with patience and proof, the way your best closer would, never pushy, never robotic.</p>
+        </div>
+        <div class="cap-demo" aria-hidden="true">
+          <div class="mini">
+            <div class="mini-msg in">It's a bit out of my budget right now</div>
+            <div class="mini-msg out">Totally understandable. Most clients earn it back in the first month, want to see the numbers?</div>
+            <div class="mini-msg in">Ok go on…</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Row 2: books appointments -->
+      <article class="cap cap-rev reveal">
+        <div class="cap-copy">
+          <h3>It books the call, not just the chat</h3>
+          <p>The moment a lead is ready, DMClosed offers real open slots and drops the booking straight onto your calendar with a confirmation. No back-and-forth, no dropped follow-ups.</p>
+        </div>
+        <div class="cap-demo" aria-hidden="true">
+          <div class="slots">
+            <span class="slots-h">Available this week</span>
+            <button class="slot">Tue · 11:00</button>
+            <button class="slot slot-pick">Fri · 11:00 <em>chosen</em></button>
+            <button class="slot">Thu · 16:00</button>
+            <div class="slot-confirm"><span class="slot-tick">✓</span> Added to calendar · invite sent</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Row 3: remembers / follows up -->
+      <article class="cap reveal">
+        <div class="cap-copy">
+          <h3>It remembers, and it follows up</h3>
+          <p>Every lead, every detail, every promise to circle back. DMClosed keeps a memory of each contact and follows up days later without being told, so warm leads never go cold.</p>
+        </div>
+        <div class="cap-demo" aria-hidden="true">
+          <div class="memory">
+            <div class="mem-row"><span class="mem-k">Remembers</span><span class="mem-v">Wanted a payment plan</span></div>
+            <div class="mem-row"><span class="mem-k">Knows</span><span class="mem-v">Travels Thursdays</span></div>
+            <div class="mem-row"><span class="mem-k">Scheduled</span><span class="mem-v">Follow-up in 3 days</span></div>
+            <div class="mem-fire"><span class="mem-fire-dot"></span> Follow-up sent · lead replied</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .caps-head { text-align: center; margin-bottom: clamp(3rem, 1rem + 5vw, 5rem); }
+  .caps-head h2 { font-size: var(--step-3); margin-top: 0.8rem; }
+
+  .caps-rows { display: grid; gap: clamp(2.5rem, 1rem + 5vw, 5rem); }
+  .cap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 0.5rem + 3vw, 4rem); align-items: center;
+  }
+  .cap-rev .cap-copy { order: 2; }
+  .cap-copy h3 { font-size: var(--step-2); margin-bottom: 0.9rem; }
+  .cap-copy p { color: var(--ink-2); font-size: var(--step-1); line-height: 1.55; max-width: 42ch; }
+
+  .cap-demo {
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line); border-radius: var(--radius-lg);
+    padding: 1.6rem; min-height: 220px; display: grid; align-content: center;
+    box-shadow: var(--shadow-md);
+  }
+
+  .mini { display: flex; flex-direction: column; gap: 0.6rem; }
+  .mini-msg { max-width: 80%; padding: 0.65rem 0.9rem; border-radius: 14px; font-size: 0.9rem; line-height: 1.4; }
+  .mini-msg.in { align-self: flex-start; background: var(--surface-hi); border-bottom-left-radius: 4px; }
+  .mini-msg.out { align-self: flex-end; background: linear-gradient(135deg, var(--primary), var(--primary-dim)); color: var(--on-primary); border-bottom-right-radius: 4px; }
+
+  .slots { display: flex; flex-direction: column; gap: 0.55rem; }
+  .slots-h { font-size: 0.78rem; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .slot { text-align: left; padding: 0.7rem 1rem; border-radius: 12px; background: var(--surface-hi); border: 1px solid var(--line-soft); font-size: 0.92rem; font-weight: 500; color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
+  .slot-pick { background: linear-gradient(135deg, var(--primary), var(--primary-dim)); color: var(--on-primary); border-color: transparent; box-shadow: 0 0 22px -6px var(--glow-indigo); }
+  .slot-pick em { font-style: normal; font-size: 0.72rem; opacity: 0.85; }
+  .slot-confirm { margin-top: 0.4rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--success); font-weight: 600; }
+  .slot-tick { width: 20px; height: 20px; border-radius: 50%; background: var(--success); color: var(--bg); display: grid; place-items: center; font-size: 0.7rem; }
+
+  .memory { display: flex; flex-direction: column; gap: 0.6rem; }
+  .mem-row { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0.95rem; background: var(--surface-hi); border-radius: 12px; border: 1px solid var(--line-soft); }
+  .mem-k { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-hi); font-weight: 700; }
+  .mem-v { font-size: 0.9rem; color: var(--ink); }
+  .mem-fire { margin-top: 0.4rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--success); font-weight: 600; }
+  .mem-fire-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 0 var(--success); animation: chpulse 2.6s infinite; }
+  @keyframes chpulse { 0%{box-shadow:0 0 0 0 oklch(0.74 0.17 150 / 0.6)} 70%{box-shadow:0 0 0 6px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+
+  @media (max-width: 820px) {
+    .cap, .cap-rev { grid-template-columns: 1fr; }
+    .cap-rev .cap-copy { order: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .mem-fire-dot { animation: none; } }
+</style>

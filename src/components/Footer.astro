@@ -1,0 +1,52 @@
+---
+import Logo from "./Logo.astro";
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <Logo />
+      <p class="footer-tag">The AI that closes deals in your DMs. Replies in seconds, follows up for days, books the call.</p>
+    </div>
+    <nav class="footer-cols" aria-label="Footer">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#how">How it works</a>
+        <a href="#proof">Proof</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <span>© {year} DMClosed. All rights reserved.</span>
+    <a href="#pricing" class="footer-cta">Start free trial →</a>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--bg-deep); border-top: 1px solid var(--line-soft); padding-top: clamp(3rem, 2rem + 3vw, 4.5rem); }
+  .footer-inner { display: grid; grid-template-columns: 1.4fr 2fr; gap: 2.5rem; padding-bottom: 2.5rem; }
+  .footer-tag { color: var(--muted); margin-top: 1rem; max-width: 34ch; line-height: 1.55; font-size: 0.95rem; }
+  .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .footer-col h4 { font-family: var(--font-body); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 700; }
+  .footer-col a { display: block; color: var(--ink-2); padding: 0.35rem 0; font-size: 0.95rem; transition: color var(--dur-fast); }
+  .footer-col a:hover { color: var(--accent-strong); }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-block: 1.5rem; border-top: 1px solid var(--line-soft); margin-top: 1rem; }
+  .footer-bottom span { color: var(--muted); font-size: 0.88rem; }
+  .footer-cta { color: var(--accent-strong); font-weight: 700; font-size: 0.92rem; }
+  @media (max-width: 720px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>

@@ -1,0 +1,269 @@
+---
+// Hero — animated DM-closing scene + ambient motion graphics
+const thread = [
+  { from: "lead", text: "Hey, saw your post. How much is the program?", t: "9:41" },
+  { from: "ai",   text: "Great to hear from you! It's $4,000 for the 12-week track. What's the main result you're after?", t: "9:41" },
+  { from: "lead", text: "Honestly that's more than I planned to spend right now 😬", t: "9:42" },
+  { from: "ai",   text: "Totally fair. Most clients earn it back inside month one. Want me to show you how the payment plan works?", t: "9:42" },
+  { from: "lead", text: "Ok yeah, send it over", t: "9:43" },
+  { from: "ai",   text: "Done. I also have Thursday 2pm or Friday 11am open for a quick call. Which works?", t: "9:43" },
+  { from: "lead", text: "Friday 11 works", t: "9:44" },
+];
+---
+<section class="hero" id="top">
+  <!-- ambient motion-graphics layer -->
+  <div class="hero-bg" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="grid-lines"></span>
+  </div>
+
+  <div class="hero-inner container">
+    <div class="hero-copy">
+      <p class="eyebrow hero-eyebrow">Your AI deal-closer in the DMs</p>
+      <h1 class="hero-h1">
+        Your leads slide<br /> into your DMs.<br />
+        <span class="hl">Most never get a reply.</span>
+      </h1>
+      <p class="hero-sub">
+        DMClosed puts an AI sales rep inside your Instagram, WhatsApp, and SMS.
+        It answers in seconds, handles every objection, follows up for days,
+        and books the call on your calendar. While you sleep.
+      </p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary btn-lg">Start 7-day free trial</a>
+        <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+      </div>
+      <ul class="hero-trust">
+        <li><svg viewBox="0 0 16 16" width="15" height="15"><path d="M3 8.5 6 11.5 13 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> No credit card</li>
+        <li><svg viewBox="0 0 16 16" width="15" height="15"><path d="M3 8.5 6 11.5 13 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Live in 15 minutes</li>
+        <li><svg viewBox="0 0 16 16" width="15" height="15"><path d="M3 8.5 6 11.5 13 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Cancel anytime</li>
+      </ul>
+    </div>
+
+    <!-- the device -->
+    <div class="hero-stage">
+      <div class="pill pill-a" data-float>
+        <span class="dot"></span> Friday 11am · call booked
+      </div>
+      <div class="pill pill-b" data-float>
+        <span class="dot dot-c"></span> $4,000 deal · closed in chat
+      </div>
+      <div class="pill pill-c" data-float>
+        <span class="dot"></span> Replied in 4 seconds
+      </div>
+
+      <div class="device" data-thread role="img"
+           aria-label="A direct message conversation where the AI handles a price objection and books a call for a 4,000 dollar program.">
+        <div class="device-top">
+          <div class="device-id">
+            <span class="avatar">A</span>
+            <div>
+              <strong>Apex Coaching</strong>
+              <span class="status"><span class="status-dot"></span> AI handling · 0 humans</span>
+            </div>
+          </div>
+          <span class="device-ch" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.94 14.46L2 22l5.7-1.5A10 10 0 1 0 12 2Z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          </span>
+        </div>
+        <div class="device-thread" data-thread-scroll>
+          {thread.map((m, i) => (
+            <div class={`msg msg-${m.from}`} data-msg data-i={i}>
+              <p>{m.text}</p>
+              <time>{m.t}</time>
+            </div>
+          ))}
+          <div class="msg msg-ai typing" data-typing aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="device-foot" aria-hidden="true">
+          <span class="fake-input">Message…</span>
+          <span class="send"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 11 21 3l-8 18-2-7-8-3Z" fill="currentColor"/></svg></span>
+        </div>
+      </div>
+
+      <div class="booked-card" data-booked aria-hidden="true">
+        <span class="booked-ic"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5 10 17.5 19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div>
+          <strong>Call booked</strong>
+          <span>Fri 11:00 · added to calendar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: clamp(7rem, 6rem + 6vw, 11rem);
+    padding-bottom: var(--space-section);
+    overflow: clip;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+    align-items: center;
+  }
+
+  /* ---------- ambient motion graphics ---------- */
+  .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; }
+  .blob-1 { width: 46vw; height: 46vw; left: -12vw; top: -14vw;
+    background: radial-gradient(circle at 50% 50%, var(--glow-indigo), transparent 70%);
+    animation: drift1 18s ease-in-out infinite; }
+  .blob-2 { width: 38vw; height: 38vw; right: -10vw; top: 2vw;
+    background: radial-gradient(circle at 50% 50%, var(--glow-cyan), transparent 70%);
+    animation: drift2 22s ease-in-out infinite; }
+  .blob-3 { width: 30vw; height: 30vw; left: 30vw; bottom: -16vw;
+    background: radial-gradient(circle at 50% 50%, var(--glow-soft), transparent 70%);
+    animation: drift3 26s ease-in-out infinite; }
+  .grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 70% 60% at 60% 30%, #000 0%, transparent 75%);
+    opacity: 0.4;
+  }
+  @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(4vw,3vw) scale(1.08)} }
+  @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-3vw,4vw) scale(1.12)} }
+  @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(3vw,-3vw) scale(1.1)} }
+
+  /* ---------- copy ---------- */
+  .hero-copy { position: relative; z-index: 1; }
+  .hero-eyebrow { margin-bottom: 1.1rem; }
+  .hero-h1 { font-size: var(--step-5); margin-bottom: 1.5rem; }
+  .hero-h1 .hl { color: var(--primary-hi); }
+  .hero-sub {
+    font-size: var(--step-1); color: var(--ink-2); line-height: 1.5;
+    max-width: 34ch; margin-bottom: 2rem; font-weight: 400;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 1.8rem; }
+  .hero-trust { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+  .hero-trust li { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--muted); font-size: var(--step--1); font-weight: 500; }
+  .hero-trust svg { color: var(--accent); }
+
+  /* ---------- device ---------- */
+  .hero-stage { position: relative; z-index: 1; display: grid; place-items: center; }
+  .device {
+    width: min(380px, 90%);
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line);
+    border-radius: 26px;
+    box-shadow: 0 40px 80px -30px oklch(0 0 0 / 0.7),
+                0 0 0 1px oklch(1 0 0 / 0.02) inset,
+                0 0 60px -20px var(--glow-soft);
+    overflow: hidden;
+  }
+  .device-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 1rem; border-bottom: 1px solid var(--line-soft);
+    background: oklch(0.16 0.02 274 / 0.6);
+  }
+  .device-id { display: flex; align-items: center; gap: 0.65rem; }
+  .avatar {
+    width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--on-primary);
+    background: linear-gradient(135deg, var(--primary-hi), var(--accent));
+  }
+  .device-id strong { display: block; font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; }
+  .device-id .status { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; color: var(--success); }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 0 var(--success); animation: pulse 2.4s infinite; }
+  .device-ch { color: var(--muted); }
+
+  .device-thread {
+    padding: 1.1rem 1rem; display: flex; flex-direction: column; gap: 0.55rem;
+    height: 420px; overflow: hidden;
+    background:
+      radial-gradient(120% 80% at 50% 0%, oklch(0.12 0.015 274) 0%, var(--surface) 60%);
+  }
+  .msg {
+    max-width: 82%; padding: 0.6rem 0.85rem; border-radius: 16px;
+    font-size: 0.9rem; line-height: 1.4; position: relative;
+  }
+  .msg p { margin: 0; }
+  .msg time { display: block; font-size: 0.66rem; color: var(--muted); margin-top: 0.25rem; text-align: right; }
+  .msg-lead { align-self: flex-start; background: var(--surface-hi); border-bottom-left-radius: 5px; color: var(--ink); }
+  .msg-ai {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dim));
+    color: var(--on-primary); border-bottom-right-radius: 5px;
+  }
+  .msg-ai time { color: oklch(1 0 0 / 0.65); }
+
+  .typing { display: inline-flex; gap: 4px; padding: 0.75rem 0.9rem; align-self: flex-end; background: var(--surface-hi); }
+  .typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); animation: blink 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  .device-foot {
+    display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 0.9rem;
+    border-top: 1px solid var(--line-soft); background: oklch(0.16 0.02 274 / 0.6);
+  }
+  .fake-input { flex: 1; color: var(--muted); font-size: 0.85rem; padding: 0.5rem 0.85rem; background: var(--bg); border-radius: var(--radius-pill); }
+  .send { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--primary-strong); color: var(--on-primary); }
+
+  /* floating pills */
+  .pill {
+    position: absolute; z-index: 3;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 0.85rem; border-radius: var(--radius-pill);
+    background: oklch(0.16 0.02 274 / 0.85); backdrop-filter: blur(8px);
+    border: 1px solid var(--line); font-size: 0.8rem; font-weight: 500; white-space: nowrap;
+    color: var(--ink);
+    box-shadow: 0 12px 30px -12px oklch(0 0 0 / 0.6);
+  }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .pill .dot-c { background: var(--success); }
+  .pill-a { top: 6%; right: -2%; }
+  .pill-b { bottom: 20%; left: -8%; }
+  .pill-c { top: 40%; right: -6%; }
+
+  .booked-card {
+    position: absolute; bottom: 4%; right: 0; z-index: 3;
+    display: flex; align-items: center; gap: 0.7rem;
+    padding: 0.75rem 1rem; border-radius: var(--radius);
+    background: oklch(0.16 0.02 274 / 0.92); backdrop-filter: blur(8px);
+    border: 1px solid var(--line); box-shadow: 0 18px 40px -16px oklch(0 0 0 / 0.7);
+  }
+  .booked-ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: var(--bg); background: var(--success); }
+  .booked-card strong { display: block; font-family: var(--font-body); font-size: 0.9rem; }
+  .booked-card span { font-size: 0.78rem; color: var(--muted); }
+
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 var(--success)} 70%{box-shadow:0 0 0 6px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+  @keyframes blink { 0%,60%,100%{opacity:0.3; transform:translateY(0)} 30%{opacity:1; transform:translateY(-2px)} }
+
+  /* float idle for pills (JS adds offsets too; this is the ambient baseline) */
+  [data-float] { animation: floaty 6s ease-in-out infinite; }
+  .pill-b[data-float] { animation-duration: 7.5s; animation-delay: -2s; }
+  .pill-c[data-float] { animation-duration: 8.5s; animation-delay: -4s; }
+  @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-copy { text-align: center; }
+    .hero-sub { margin-inline: auto; }
+    .hero-actions, .hero-trust { justify-content: center; }
+    .hero-stage { margin-top: 1rem; }
+  }
+  @media (max-width: 560px) {
+    .hero { padding-top: clamp(6rem, 5rem + 8vw, 8rem); }
+    .hero-h1 { font-size: clamp(2.5rem, 1.9rem + 4.4vw, 3.2rem); }
+    .hero-sub { font-size: var(--step-0); max-width: 38ch; }
+    .hero-trust { gap: 1rem; }
+  }
+  @media (max-width: 460px) {
+    .pill-b { left: -2%; } .pill-c { right: -2%; } .pill-a { right: 0; }
+    .booked-card { right: -2%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blob, [data-float], .status-dot, .typing span { animation: none !important; }
+  }
+</style>
