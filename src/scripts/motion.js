@@ -112,23 +112,67 @@ if (reduceMotion) {
       gsap.set(el, { y: 26, opacity: 0 });
       tl.to(el, { y: 0, opacity: 1, duration: 0.9 }, 0.35 + i * 0.1);
     });
-    const frame = document.querySelector(".robot-frame");
-    if (frame) {
-      gsap.set(frame, { scale: 0.92, opacity: 0, filter: "blur(8px)" });
-      tl.to(frame, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 1.3 }, 0.3);
+    const media = document.querySelector("[data-hero-media]");
+    if (media) {
+      gsap.set(media, { clipPath: "inset(0% 0% 0% 18%)", opacity: 0 });
+      tl.to(media, { clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 1.4, ease: "expo.out" }, 0.25);
     }
   }
   playHeroEntrance();
 
-  /* ---- Generic reveals (tuned per element) ---- */
-  document.querySelectorAll(".reveal").forEach((el) => {
-    ScrollTrigger.create({
-      trigger: el,
-      start: "top 88%",
-      once: true,
-      onEnter: () => el.classList.add("is-in"),
+  /* ---- Hero media parallax: cinematic zoom-out as you leave the hero ---- */
+  const heroVideo = document.querySelector(".hero-video");
+  if (heroVideo) {
+    gsap.to(heroVideo, {
+      yPercent: 10, scale: 1.16, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 },
     });
+  }
+
+  /* ---- Apple-style reveals: fade + rise + de-blur, staggered in batches ----
+     Elements that enter the viewport together cascade with a small stagger,
+     so each section assembles itself as you scroll into it. The animation is
+     pure CSS transition — JS only toggles .is-in (timer-staggered), so content
+     can never get stuck hidden by a stalled tween.                           */
+  const revealEls = gsap.utils.toArray(".reveal");
+  ScrollTrigger.batch(revealEls, {
+    start: "top 88%",
+    once: true,
+    onEnter: (batch) =>
+      batch.forEach((el, i) => setTimeout(() => el.classList.add("is-in"), i * 95)),
   });
+  // safety net: anything still hidden a moment after load gets revealed
+  window.addEventListener("load", () =>
+    setTimeout(() => {
+      revealEls.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && !el.classList.contains("is-in")) el.classList.add("is-in");
+      });
+      ScrollTrigger.refresh();
+    }, 400)
+  );
+
+  /* ---- Rotating accent word in the hero headline ---- */
+  function initRotator() {
+    const r = document.querySelector("[data-rotate]");
+    if (!r) return;
+    const words = gsap.utils.toArray(r.querySelectorAll("em"));
+    if (words.length < 2) return;
+    gsap.set(words, { autoAlpha: 0, yPercent: 55, filter: "blur(10px)" });
+    gsap.set(words[0], { autoAlpha: 1, yPercent: 0, filter: "blur(0px)" });
+    let i = 0;
+    const next = () => {
+      const cur = words[i];
+      i = (i + 1) % words.length;
+      const nxt = words[i];
+      gsap.timeline({ onComplete: () => gsap.delayedCall(2.0, next) })
+        .to(cur, { autoAlpha: 0, yPercent: -55, filter: "blur(10px)", duration: 0.5, ease: "power2.in" })
+        .fromTo(nxt, { autoAlpha: 0, yPercent: 55, filter: "blur(10px)" },
+                     { autoAlpha: 1, yPercent: 0, filter: "blur(0px)", duration: 0.65, ease: "power3.out" }, "-=0.12");
+    };
+    gsap.delayedCall(2.4, next);
+  }
+  initRotator();
 
   /* ---- Proof thread: reveal beats on scroll, staggered ---- */
   const proof = document.querySelector("[data-proof-thread]");

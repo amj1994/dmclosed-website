@@ -46,8 +46,9 @@
   --shadow-glow:   0 30px 70px -28px var(--glow-ember);
 
   /* ---- Type ------------------------------------------- */
-  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Barlow Condensed", system-ui, sans-serif;
   --font-body:    "Barlow", system-ui, -apple-system, sans-serif;
+  --font-serif:   "Spectral", Georgia, "Times New Roman", serif;
 
   /* fluid display scale (>=1.25 ratio) */
   --step--1: clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem);

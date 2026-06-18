@@ -1,13 +1,31 @@
 ---
-// Hero — solid-black stage, robot floating in a red glow, B2B copy
+// Hero — full-bleed robot video on the right, crystal text on black at left
 ---
 <section class="hero" id="top">
+  <!-- full-height video covering the right side, bleeding to the edge -->
+  <div class="hero-media" data-hero-media>
+    <video
+      class="hero-video"
+      data-robot
+      autoplay muted loop playsinline
+      poster="/media/robot-hero-poster.jpg"
+      aria-label="A humanoid AI sales agent turning to face the viewer.">
+      <source src="/media/robot-hero.webm" type="video/webm" />
+      <source src="/media/robot-hero.mp4" type="video/mp4" />
+    </video>
+    <span class="hero-media-fade" aria-hidden="true"></span>
+  </div>
+
   <div class="hero-inner container">
     <div class="hero-copy">
       <p class="kicker hero-kicker" data-hero="0">AI sales agent · done&#8209;for&#8209;you · live in days</p>
       <h1 class="hero-h1" data-split>
         <span>Your DMs just</span>
-        <span>hired a <em>closer.</em></span>
+        <span>hired a <span class="rotator" data-rotate aria-label="closer">
+          <em>closer.</em>
+          <em>rainmaker.</em>
+          <em>deal&#8209;maker.</em>
+        </span></span>
       </h1>
       <p class="hero-sub" data-hero="1">
         We build, train, and run an AI sales rep inside your Instagram, WhatsApp, and SMS.
@@ -27,22 +45,6 @@
         <li><svg viewBox="0 0 16 16" width="15" height="15"><path d="M3 8.5 6 11.5 13 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Proven on $50K deals</li>
       </ul>
     </div>
-
-    <!-- robot, floating in a red glow on solid black -->
-    <div class="hero-stage" data-hero="4">
-      <span class="robot-halo" aria-hidden="true"></span>
-      <div class="robot-wrap">
-        <video
-          class="robot-video"
-          data-robot
-          autoplay muted loop playsinline
-          poster="/media/robot-hero-poster.jpg"
-          aria-label="A humanoid AI sales agent turning to face the viewer.">
-          <source src="/media/robot-hero.webm" type="video/webm" />
-          <source src="/media/robot-hero.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </div>
   </div>
 
   <a class="hero-scroll" href="#how" aria-label="Scroll to how it works">
@@ -59,66 +61,67 @@
     padding-top: clamp(7rem, 6rem + 6vw, 10rem);
     padding-bottom: var(--space-section);
     overflow: clip;
-    background: #000;            /* solid black stage */
-  }
-  .hero-inner {
-    position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    gap: clamp(2rem, 1rem + 4vw, 5rem);
-    align-items: center;
+    background: #000;
   }
 
-  /* ---------- copy ---------- */
-  .hero-copy { position: relative; }
-  .hero-kicker { margin-bottom: 1.3rem; }
-  .hero-h1 { font-size: var(--step-5); margin-bottom: 1.6rem; line-height: 0.94; }
-  .hero-h1 span { display: block; }
-  .hero-h1 em {
-    font-style: italic;
-    color: var(--primary);
-    text-shadow: 0 0 42px var(--glow-primary);
+  /* ---------- full-bleed media (right side) ---------- */
+  .hero-media {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: clamp(46%, 40% + 12vw, 56%);
+    z-index: 0;
+    overflow: hidden;
   }
+  .hero-video {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 30%;
+    transform: scale(1.04);          /* a touch of headroom for parallax */
+    will-change: transform;
+  }
+  /* black gradient on the left + soft vignette so video melts into the text side */
+  .hero-media-fade {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(90deg, #000 0%, rgba(0,0,0,0.78) 16%, rgba(0,0,0,0.18) 42%, transparent 62%),
+      linear-gradient(0deg, #000 0%, transparent 26%),
+      radial-gradient(120% 90% at 78% 38%, transparent 40%, rgba(0,0,0,0.35) 100%);
+  }
+
+  /* ---------- copy (left) ---------- */
+  .hero-inner { position: relative; z-index: 2; width: var(--container); }
+  .hero-copy { position: relative; max-width: 38rem; }
+  .hero-kicker { margin-bottom: 1.4rem; }
+  .hero-h1 {
+    font-size: clamp(2.9rem, 2rem + 5vw, 5.4rem);
+    line-height: 0.95; margin-bottom: 1.7rem;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+  }
+  .hero-h1 > span { display: block; }
+  .hero-h1 em {
+    font-family: var(--font-serif);
+    font-style: italic; font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--primary);
+    text-shadow: 0 0 46px var(--glow-primary);
+    padding-right: 0.08em;          /* protect the italic's right bearing */
+  }
+  /* rotating accent word — all words stacked in one grid cell */
+  .hero-h1 .rotator { display: inline-grid; vertical-align: baseline; }
+  .hero-h1 .rotator em { grid-area: 1 / 1; white-space: nowrap; will-change: transform, opacity, filter; }
+  /* only the first word shows until JS takes over the rotation */
+  .hero-h1 .rotator em:nth-child(n+2) { visibility: hidden; }
   .hero-sub {
     font-size: var(--step-1); color: var(--ink-2); line-height: 1.5;
-    max-width: 44ch; margin-bottom: 2rem; font-weight: 400;
+    max-width: 40ch; margin-bottom: 2rem; font-weight: 400;
   }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 1.9rem; }
   .hero-trust { display: flex; flex-wrap: wrap; gap: 1.3rem; }
   .hero-trust li { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--muted); font-size: var(--step--1); font-weight: 500; }
   .hero-trust svg { color: var(--primary); }
 
-  /* ---------- robot stage ---------- */
-  .hero-stage { position: relative; display: grid; place-items: center; min-height: 460px; }
-  /* big localized red/orange glow behind the robot */
-  .robot-halo {
-    position: absolute; z-index: 0;
-    width: 92%; aspect-ratio: 1; border-radius: 50%;
-    background:
-      radial-gradient(circle at 50% 50%, var(--ember) 0%, oklch(0.585 0.215 33 / 0.6) 22%, oklch(0.585 0.215 33 / 0.22) 45%, transparent 66%);
-    filter: blur(26px);
-    opacity: 0.9;
-    animation: haloPulse 7s ease-in-out infinite;
-  }
-  @keyframes haloPulse { 0%,100%{ transform: scale(1); opacity: 0.85 } 50%{ transform: scale(1.05); opacity: 1 } }
-  .robot-wrap {
-    position: relative; z-index: 1;
-    width: min(540px, 100%); aspect-ratio: 1 / 1;
-    overflow: hidden;
-  }
-  .robot-video {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center 32%;
-    /* melt the robot into the black background — no card, no border */
-    -webkit-mask-image: radial-gradient(68% 78% at 50% 40%, #000 36%, rgba(0,0,0,0.5) 60%, transparent 78%);
-    mask-image: radial-gradient(68% 78% at 50% 40%, #000 36%, rgba(0,0,0,0.5) 60%, transparent 78%);
-  }
-
   /* scroll cue */
   .hero-scroll {
-    position: absolute; left: 50%; bottom: 1.6rem; z-index: 3;
-    transform: translateX(-50%);
+    position: absolute; left: clamp(1.5rem, 4vw, 4rem); bottom: 1.6rem; z-index: 3;
     width: 26px; height: 42px; border-radius: 14px;
     border: 1.5px solid var(--line);
     display: grid; place-items: start center; padding-top: 7px;
@@ -126,23 +129,30 @@
   .hero-scroll span { width: 4px; height: 8px; border-radius: 2px; background: var(--primary); animation: scrolldot 1.8s ease-in-out infinite; }
   @keyframes scrolldot { 0%,100%{transform:translateY(0); opacity:1} 60%{transform:translateY(12px); opacity:0.2} }
 
+  /* ---------- responsive ---------- */
   @media (max-width: 980px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-copy { text-align: center; }
-    .hero-sub { margin-inline: auto; }
+    .hero { align-items: center; padding-top: clamp(8rem, 7rem + 6vw, 11rem); padding-bottom: clamp(3rem, 2rem + 6vw, 5rem); }
+    /* media becomes a full-bleed backdrop; centered text overlays with heavy gradient */
+    .hero-media { width: 100%; }
+    .hero-video { object-position: 50% 20%; }
+    .hero-media-fade {
+      background:
+        linear-gradient(0deg, #000 4%, rgba(0,0,0,0.86) 30%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.3) 100%);
+    }
+    .hero-copy { max-width: 34rem; margin-inline: auto; text-align: center; }
+    .hero-kicker { justify-content: center; }
     .hero-actions, .hero-trust { justify-content: center; }
-    .hero-kicker { display: inline-flex; }
-    .robot-wrap { width: min(420px, 82%); }
+    .hero-sub { margin-inline: auto; }
+    .hero-h1 { font-size: clamp(2.8rem, 2rem + 7vw, 4.4rem); }
+    .hero-scroll { display: none; }
   }
   @media (max-width: 560px) {
-    .hero { min-height: auto; padding-top: 7rem; }
-    .hero-h1 { font-size: clamp(2.7rem, 2rem + 6vw, 3.6rem); }
-    .hero-sub { font-size: var(--step-0); }
+    .hero-h1 { font-size: clamp(2.6rem, 1.9rem + 8vw, 3.6rem); }
+    .hero-sub { font-size: var(--step-0); max-width: 36ch; }
     .hero-trust { gap: 0.9rem; }
-    .hero-scroll { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .robot-halo, .hero-scroll span { animation: none !important; }
+    .hero-scroll span { animation: none !important; }
   }
 </style>

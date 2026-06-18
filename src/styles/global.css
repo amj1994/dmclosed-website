@@ -1,14 +1,13 @@
-/* Barlow Condensed — display (tight, industrial precision) */
-@import "@fontsource/barlow-condensed/500.css";
-@import "@fontsource/barlow-condensed/600.css";
-@import "@fontsource/barlow-condensed/700.css";
-@import "@fontsource/barlow-condensed/800.css";
-@import "@fontsource/barlow-condensed/700-italic.css";
+/* Bricolage Grotesque — contemporary display (variable weight) */
+@import "@fontsource-variable/bricolage-grotesque/wght.css";
 /* Barlow — body (humanist grotesk, readable) */
 @import "@fontsource/barlow/400.css";
 @import "@fontsource/barlow/500.css";
 @import "@fontsource/barlow/600.css";
 @import "@fontsource/barlow/700.css";
+/* Spectral — elegant serif italic, used only for display accents */
+@import "@fontsource/spectral/500-italic.css";
+@import "@fontsource/spectral/600-italic.css";
 
 @import "./tokens.css";
 
@@ -141,17 +140,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 .btn-arrow svg { transition: transform var(--dur-fast) var(--ease-out-quart); }
 .btn:hover .btn-arrow svg { transform: translateX(4px); }
 
-/* ---- Reveal system (visible by default, enhanced when JS active) ---- */
+/* ---- Reveal system — Apple-style fade + rise + de-blur ----
+   CSS-transition driven (reliable: content can never stay stuck hidden).
+   JS only toggles .is-in, staggered, as elements enter the viewport.      */
 .reveal { opacity: 1; }
 html.has-motion .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(42px);
+  filter: blur(8px);
+  transition:
+    opacity 0.95s var(--ease-out-quint),
+    transform 0.95s var(--ease-out-quint),
+    filter 0.95s var(--ease-out-quint);
+  will-change: opacity, transform;
 }
 html.has-motion .reveal.is-in {
   opacity: 1;
   transform: none;
-  transition: opacity var(--dur) var(--ease-out-expo),
-              transform var(--dur) var(--ease-out-expo);
+  filter: none;
 }
 
 /* per-word/line split targets stay invisible until choreographed */
