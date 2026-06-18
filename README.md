@@ -1,31 +1,28 @@
 # DMClosed — Website
 
-The marketing website for **DMClosed**, an AI sales agent that lives in your DMs (Instagram, WhatsApp, SMS, Messenger), replies in seconds, handles objections, and books calls 24/7.
+Marketing site for **DMClosed** — a done-for-you **AI sales agent service for businesses (B2B)**.
+We build, train, and operate an AI rep that lives in a company's DMs (WhatsApp, Instagram,
+Messenger, Telegram, SMS, iMessage, email, web chat), replies in seconds, handles objections,
+follows up for days, and books calls 24/7. Managed service, from **$497/mo**.
 
-Built with **Astro** (fast, SEO-friendly, static output) + **GSAP / Lenis** for motion.
+Built with **Astro** (static, fast, SEO-friendly) + **GSAP / Lenis** for motion. Cinematic
+orange-on-black theme with a full-bleed, orange-graded robot hero video.
+
+> **Docs:** [PRODUCT.md](PRODUCT.md) (positioning) · [BRAND.md](BRAND.md) (visual + voice
+> guidelines) · [CONTENT.md](CONTENT.md) (all site copy) · [DESIGN.md](DESIGN.md) (design system).
 
 ---
 
 ## Quick start
 
-You need Node.js 18+ installed.
+Requires Node 18+.
 
 ```bash
-# 1. Install dependencies (creates node_modules)
-npm install
-
-# 2. Start the dev server (hot reload)
-npm run dev
-# open the printed URL, usually http://localhost:4321
-
-# 3. Build the production site (outputs to /dist)
-npm run build
-
-# 4. Preview the production build locally
-npm run preview
+npm install        # install dependencies
+npm run dev        # dev server with hot reload → http://localhost:4321
+npm run build      # production build → /dist
+npm run preview    # preview the production build locally
 ```
-
-> Note: `node_modules` is NOT included in this zip. Run `npm install` once and it will be recreated from `package.json`.
 
 ---
 
@@ -33,61 +30,50 @@ npm run preview
 
 ```
 dmclosed/
-├─ astro.config.mjs          # Astro config (site URL etc.)
-├─ package.json              # dependencies + scripts
-├─ public/                   # static assets served as-is
-│  ├─ logo.png               # nav/footer logo (1307x402, transparent)
-│  ├─ icon.png               # square app icon
-│  └─ favicon.svg            # browser-tab icon
+├─ astro.config.mjs           # Astro config
+├─ PRODUCT.md / BRAND.md / CONTENT.md / DESIGN.md   # brand + content source of truth
+├─ public/
+│  ├─ media/                  # hero robot video assets (see "Hero video" below)
+│  │  ├─ robot-hero.mp4       # HD, orange-graded, watermark-free, looped (Safari)
+│  │  ├─ robot-hero.webm      # HD VP9 (Chrome/Firefox/Edge)
+│  │  └─ robot-hero-poster.jpg
+│  └─ logo.png, icon.png, favicon.svg
 └─ src/
-   ├─ layouts/
-   │  └─ Layout.astro        # <head>, SEO meta, JSON-LD, fonts
-   ├─ pages/
-   │  └─ index.astro         # the single landing page (imports all sections)
-   ├─ components/            # one file per page section
-   │  ├─ Nav.astro
-   │  ├─ Hero.astro          # animated DM-closing scene + motion graphics
-   │  ├─ Problem.astro       # animated stat + speed bars
-   │  ├─ HowItWorks.astro    # 3-step flow with progress ring
-   │  ├─ Proof.astro         # $40K FueGenix case-study conversation
-   │  ├─ Capabilities.astro  # alternating feature rows
-   │  ├─ Channels.astro      # channel cards
-   │  ├─ Pricing.astro       # $97 / $297 / $497 tiers
-   │  ├─ FAQ.astro           # accordion
-   │  ├─ CTA.astro           # closing call-to-action
-   │  ├─ Footer.astro
-   │  └─ Logo.astro          # shared logo component
+   ├─ layouts/Layout.astro    # <head>, SEO meta, JSON-LD, fonts
+   ├─ pages/index.astro       # the single landing page (imports all sections)
+   ├─ components/             # one file per section: Nav, Hero, Problem, HowItWorks,
+   │                          # Capabilities, Channels, Proof, Pricing, FAQ, CTA, Footer, Logo
    ├─ styles/
-   │  ├─ tokens.css          # ALL brand colors (OKLCH), fonts, spacing, motion
-   │  └─ global.css          # base styles, buttons, reveal system
-   └─ scripts/
-      └─ motion.js           # Lenis smooth scroll + GSAP scroll reveals + counters
+   │  ├─ tokens.css           # ALL brand colors (OKLCH), fonts, spacing, motion vars
+   │  └─ global.css           # base styles, buttons, reveal system, font imports
+   └─ scripts/motion.js       # Lenis smooth scroll + GSAP reveals, hero choreography,
+                              # rotating accent word, magnetic buttons, counters
 ```
 
----
-
-## Brand reference
-
-| Token | Value |
-|-------|-------|
-| Primary (blue) | `#456AF7` |
-| Accent (cyan) | `#00D0EC` |
-| Background | near-black (see `src/styles/tokens.css`) |
-| Display font | Barlow Condensed |
-| Body font | Barlow |
-
-All colors live in `src/styles/tokens.css` as CSS variables — change them there and the whole site updates.
+## Where to edit
+- **Copy:** each section's `.astro` file in `src/components/` (mirror changes in `CONTENT.md`).
+- **Colors / fonts / spacing:** `src/styles/tokens.css`.
+- **Pricing:** the `plans` array at the top of `Pricing.astro` ($497 / $897).
+- **SEO title / description:** `src/layouts/Layout.astro`.
 
 ---
 
-## Where to start editing
+## Hero video pipeline
 
-- **Copy / text:** each section's `.astro` file in `src/components/`
-- **Colors / fonts / spacing:** `src/styles/tokens.css`
-- **Pricing:** `src/components/Pricing.astro` (the `plans` array at the top)
-- **Logo:** replace `public/logo.png`
-- **SEO title / description:** `src/layouts/Layout.astro`
+The hero robot is a source AI clip processed with **ffmpeg**: Kling watermark cropped out,
+color-graded toward the brand orange, sharpened, scaled to HD (2282×1280), and made into a
+seamless **ping-pong (forward+reverse) loop** so the head-turn never jump-cuts. Exported as
+faststart H.264 `.mp4`, VP9 `.webm`, and a poster `.jpg`. To regenerate from a new source clip,
+re-run the same crop → `hue`/`eq` grade → `scale`+`unsharp` → `split/reverse/concat` chain into
+`public/media/`.
 
 ---
 
-Built as the starting point for the next iteration. Not from scratch. 🚀
+## Deploy (Vercel)
+
+Static Astro — Vercel auto-detects the framework.
+
+- **Build command:** `astro build` (auto) · **Output dir:** `dist` (auto) · **Install:** `npm install`
+- Connect the GitHub repo in the Vercel dashboard, or `vercel --prod` with the CLI.
+- No environment variables or serverless functions required (fully static).
+- Set the production domain to `dmclosed.com` (matches `site` in `astro.config.mjs`).
