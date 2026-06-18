@@ -1,44 +1,49 @@
 /* ============================================================
    DMClosed — Design Tokens
-   Strategy: Committed dark. Electric indigo carries the brand.
-   All color in OKLCH. Contrast verified for WCAG AA on dark.
+   Strategy: Incandescent-orange drench on cinematic near-black.
+   One molten color carries the brand. All color in OKLCH.
+   Contrast verified for WCAG AA on dark.
    ============================================================ */
 
 :root {
-  /* ---- Surfaces ---------------------------------------- */
-  --bg:            oklch(0.09 0.012 274);   /* near-black, faint indigo */
-  --bg-deep:       oklch(0.06 0.010 274);   /* deepest wells, footer */
-  --surface:       oklch(0.14 0.018 274);   /* panels, cards */
-  --surface-2:     oklch(0.18 0.022 274);   /* raised elements */
-  --surface-hi:    oklch(0.22 0.026 274);   /* hover, active panels */
-  --line:          oklch(0.28 0.024 274);   /* hairline borders */
-  --line-soft:     oklch(0.22 0.020 274);   /* subtler borders */
+  /* ---- Surfaces (warm near-black, chroma toward orange) ---- */
+  --bg:            oklch(0.11 0.020 45);    /* near-black, warm */
+  --bg-deep:       oklch(0.075 0.016 42);   /* deepest wells, footer */
+  --surface:       oklch(0.155 0.026 46);   /* panels, cards */
+  --surface-2:     oklch(0.195 0.030 47);   /* raised elements */
+  --surface-hi:    oklch(0.245 0.034 48);   /* hover, active panels */
+  --line:          oklch(0.32 0.030 48);    /* hairline borders */
+  --line-soft:     oklch(0.25 0.024 47);    /* subtler borders */
 
   /* ---- Brand ------------------------------------------- */
-  --primary:       oklch(0.58 0.215 268);   /* electric indigo */
-  --primary-strong:oklch(0.58 0.215 268);   /* alias: same as primary on dark */
-  --primary-hi:    oklch(0.66 0.205 268);   /* hover / brighter */
-  --primary-dim:   oklch(0.42 0.160 268);   /* pressed / muted brand */
-  --accent:        oklch(0.78 0.150 210);   /* electric cyan */
-  --accent-strong: oklch(0.78 0.150 210);   /* alias: same as accent on dark */
-  --accent-hi:     oklch(0.85 0.140 205);   /* cyan highlight */
-  --success:       oklch(0.74 0.170 150);   /* booked / paid green */
+  --primary:       oklch(0.705 0.196 47);   /* molten orange */
+  --primary-strong:oklch(0.705 0.196 47);
+  --primary-hi:    oklch(0.765 0.183 53);   /* hover / brighter */
+  --primary-dim:   oklch(0.56 0.175 42);    /* pressed / muted brand */
+  --ember:         oklch(0.585 0.215 33);   /* deep red-orange, for depth */
+  --ember-hi:      oklch(0.66 0.210 36);
+  --accent:        oklch(0.84 0.150 78);    /* amber / gold, used sparingly */
+  --accent-strong: oklch(0.84 0.150 78);
+  --accent-hi:     oklch(0.89 0.135 84);
+  --success:       oklch(0.78 0.160 150);   /* booked / paid green */
 
   /* ---- Text -------------------------------------------- */
-  --ink:           oklch(0.97 0.006 274);   /* primary text  ~16:1 */
-  --ink-2:         oklch(0.80 0.012 274);   /* secondary     ~8:1  */
-  --muted:         oklch(0.66 0.018 274);   /* tertiary/label ~4.7:1 */
-  --on-primary:    oklch(0.99 0.004 274);   /* text on indigo fill */
+  --ink:           oklch(0.972 0.012 70);   /* primary text  ~16:1 */
+  --ink-2:         oklch(0.835 0.018 60);   /* secondary     ~9:1  */
+  --muted:         oklch(0.700 0.022 55);   /* tertiary/label ~5:1 */
+  --on-primary:    oklch(0.170 0.030 40);   /* dark text on orange fill (AA) */
 
   /* ---- Glows (for motion graphics) --------------------- */
-  --glow-indigo:   oklch(0.58 0.215 268 / 0.45);
-  --glow-cyan:     oklch(0.78 0.150 210 / 0.40);
-  --glow-soft:     oklch(0.58 0.215 268 / 0.18);
+  --glow-primary:  oklch(0.705 0.196 47 / 0.50);
+  --glow-ember:    oklch(0.585 0.215 33 / 0.45);
+  --glow-amber:    oklch(0.84 0.150 78 / 0.40);
+  --glow-soft:     oklch(0.705 0.196 47 / 0.16);
 
-  /* ---- Soft shadows (kept as tokens for reuse) --------- */
-  --shadow-sm:     0 2px 10px -3px oklch(0 0 0 / 0.4);
-  --shadow-md:     0 16px 40px -18px oklch(0 0 0 / 0.55);
-  --shadow-lg:     0 40px 80px -30px oklch(0 0 0 / 0.7);
+  /* ---- Soft shadows ------------------------------------ */
+  --shadow-sm:     0 2px 10px -3px oklch(0 0 0 / 0.45);
+  --shadow-md:     0 16px 40px -18px oklch(0 0 0 / 0.6);
+  --shadow-lg:     0 40px 90px -34px oklch(0 0 0 / 0.72);
+  --shadow-glow:   0 30px 70px -28px var(--glow-ember);
 
   /* ---- Type ------------------------------------------- */
   --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
@@ -50,20 +55,22 @@
   --step-1:  clamp(1.3rem, 1.2rem + 0.5vw, 1.6rem);
   --step-2:  clamp(1.75rem, 1.5rem + 1.2vw, 2.4rem);
   --step-3:  clamp(2.4rem, 1.9rem + 2.4vw, 3.6rem);
-  --step-4:  clamp(3rem, 2.2rem + 3.8vw, 5.25rem);
-  --step-5:  clamp(3.4rem, 2.3rem + 5vw, 6rem);
+  --step-4:  clamp(3rem, 2.2rem + 3.8vw, 5rem);
+  --step-5:  clamp(3.3rem, 2.3rem + 5vw, 5.9rem);
 
   /* ---- Space ------------------------------------------ */
   --space-section: clamp(5rem, 3.5rem + 7vw, 9rem);
-  --container:     min(1200px, 92vw);
+  --container:     min(1240px, 92vw);
   --container-narrow: min(820px, 92vw);
   --radius:        14px;
   --radius-lg:     22px;
+  --radius-xl:     30px;
   --radius-pill:   999px;
 
   /* ---- Motion ----------------------------------------- */
   --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
   --ease-out-expo:  cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast:   0.32s;
   --dur:        0.6s;
   --dur-slow:   0.9s;

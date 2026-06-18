@@ -1,58 +1,45 @@
 ---
 const plans = [
   {
-    name: "Starter", price: "97", cadence: "/mo",
-    tagline: "For solo coaches and operators closing in one inbox.",
+    name: "Launch", price: "497", cadence: "/mo",
+    tagline: "One primary channel, fully managed. The fastest way to stop losing leads to silence.",
     features: [
-      "1 channel (Instagram or WhatsApp)",
-      "Up to 150 conversations / month",
-      "Instant replies + objection handling",
-      "Books calls inside the chat",
-      "2 automatic smart follow-ups",
-      "Email support",
+      "1 primary channel (Instagram or WhatsApp)",
+      "AI agent built & trained on your offer",
+      "Objection handling in your brand voice",
+      "Books calls straight to your calendar",
+      "Smart multi-day follow-up sequences",
+      "Weekly tuning + performance report",
     ],
-    cta: "Start free trial", featured: false,
+    cta: "Book a demo", featured: false,
   },
   {
-    name: "Growth", price: "297", cadence: "/mo",
-    tagline: "For businesses with leads coming in on every channel.",
+    name: "Scale", price: "897", cadence: "/mo",
+    tagline: "Every channel, outbound campaigns, and a dedicated strategist. Built for teams with real volume.",
     features: [
-      "All 4 channels in one inbox",
-      "Up to 600 conversations / month",
-      "Comment-to-DM automation",
-      "Contact memory + no-show reschedule",
-      "Calendar + CRM integrations",
-      "Priority support + onboarding call",
+      "Everything in Launch, plus:",
+      "All 8 channels in one shared brain",
+      "Outbound DM + comment-to-DM campaigns",
+      "CRM / GoHighLevel integration",
+      "Conversation analytics + optimization",
+      "Priority tuning + dedicated strategist",
     ],
-    cta: "Start free trial", featured: true,
-  },
-  {
-    name: "Pro", price: "497", cadence: "/mo",
-    tagline: "For high-volume and multi-location sales teams.",
-    features: [
-      "Everything in Growth, plus:",
-      "Up to 1,500 conversations / month",
-      "Outbound DM campaigns + sequences",
-      "Voice, image, video & PDF understanding",
-      "Advanced AI tuning + live web search",
-      "Done-for-you setup + dedicated manager",
-    ],
-    cta: "Start free trial", featured: false,
+    cta: "Book a demo", featured: true,
   },
 ];
 ---
 <section class="pricing section" id="pricing" aria-labelledby="pricing-h">
   <div class="container">
     <header class="pricing-head">
-      <p class="eyebrow reveal">Start free. Pay when it works.</p>
-      <h2 id="pricing-h" class="reveal">Try it for 7 days. Watch it book a call.</h2>
-      <p class="pricing-sub reveal">No credit card to start. Connect your inbox, let the AI run live, and decide once you have seen it close. Most accounts book their first call inside the trial.</p>
-      <p class="pricing-anchor reveal">A human appointment setter costs <strong>$2,000&ndash;$4,000 a month</strong>, works 8 hours a day, and quits. DMClosed starts at $97 and never clocks out.</p>
+      <p class="kicker reveal">Two ways to deploy</p>
+      <h2 id="pricing-h" class="reveal">Pick the engagement. We run the agent.</h2>
+      <p class="pricing-sub reveal">Done&#8209;for&#8209;you, not another tool to learn. We build, train, and operate your AI sales agent — you just take the calls it books. No setup fees, no long contracts.</p>
+      <p class="pricing-anchor reveal">A human appointment setter runs <strong>$3,000&ndash;$5,000 a month</strong>, works one shift, and eventually quits. DMClosed starts at $497 and never clocks out.</p>
     </header>
 
     <div class="plans">
       {plans.map((p) => (
-        <article class={`plan reveal ${p.featured ? "plan-featured" : ""}`}>
+        <article class={`plan reveal ${p.featured ? "plan-featured" : ""}`} data-tilt>
           {p.featured && <span class="plan-badge">Most popular</span>}
           <h3 class="plan-name">{p.name}</h3>
           <p class="plan-tagline">{p.tagline}</p>
@@ -74,49 +61,52 @@ const plans = [
         <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 11v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.6" r="1.2" fill="currentColor"/></svg>
       </span>
       <p>
-        <strong>What counts as a conversation?</strong>
-        One lead, handled start to finish, qualifying, answering questions, handling objections, and booking the call, no matter how many messages it takes. You are billed per lead the AI talks to, never per message. Need more in a busy month? Add a conversation pack anytime, no plan change required.
+        <strong>What's included in a managed engagement?</strong>
+        We handle everything: building the agent, training it on your offer and objections, wiring up
+        your channels and calendar, and tuning it every week as real conversations come in. You get a
+        closer that works your inbox 24/7 — and a strategist who makes it sharper over time.
       </p>
     </div>
 
-    <p class="pricing-foot reveal">Every plan includes a 7-day free trial &middot; cancel anytime &middot; no setup fees.</p>
+    <p class="pricing-foot reveal">Month&#8209;to&#8209;month &middot; no setup fees &middot; cancel anytime.</p>
   </div>
 </section>
 
 <style>
   .pricing-head { text-align: center; margin-bottom: clamp(2.5rem, 1rem + 4vw, 4rem); }
+  .pricing-head .kicker { justify-content: center; }
   .pricing-head h2 { font-size: var(--step-3); margin: 0.8rem 0 1rem; }
-  .pricing-sub { color: var(--ink-2); font-size: var(--step-1); max-width: 54ch; margin-inline: auto; line-height: 1.55; }
+  .pricing-sub { color: var(--ink-2); font-size: var(--step-1); max-width: 56ch; margin-inline: auto; line-height: 1.55; }
   .pricing-anchor {
-    margin: 1.4rem auto 0; max-width: 52ch; color: var(--muted); font-size: var(--step-0); line-height: 1.5;
-    padding: 0.85rem 1.2rem; border: 1px solid var(--line-soft); border-radius: var(--radius-pill);
+    margin: 1.4rem auto 0; max-width: 56ch; color: var(--muted); font-size: var(--step-0); line-height: 1.5;
+    padding: 0.85rem 1.3rem; border: 1px solid var(--line-soft); border-radius: var(--radius-pill);
     background: var(--surface);
   }
   .pricing-anchor strong { color: var(--ink); font-weight: 600; }
 
-  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: start; }
-  @media (max-width: 880px) { .plans { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; } }
+  .plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; align-items: start; max-width: 760px; margin-inline: auto; }
+  @media (max-width: 720px) { .plans { grid-template-columns: 1fr; max-width: 440px; } }
   .plan {
     position: relative;
     background: linear-gradient(180deg, var(--surface-2), var(--surface));
     border: 1px solid var(--line); border-radius: var(--radius-lg);
-    padding: 2rem 1.7rem;
+    padding: 2.2rem 1.9rem;
     transition: transform var(--dur-fast) var(--ease-out-quart), border-color var(--dur-fast);
   }
   .plan:hover { transform: translateY(-5px); }
   .plan-featured {
     border-color: var(--primary);
-    box-shadow: 0 0 0 1px var(--primary), 0 30px 70px -30px var(--glow-indigo);
+    box-shadow: 0 0 0 1px var(--primary), 0 30px 70px -30px var(--glow-ember);
   }
   .plan-badge {
     position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-    background: var(--primary-strong); color: var(--on-primary);
+    background: linear-gradient(180deg, var(--primary-hi), var(--primary)); color: var(--on-primary);
     font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
     padding: 0.3rem 0.85rem; border-radius: var(--radius-pill); white-space: nowrap;
-    box-shadow: 0 8px 20px -6px var(--glow-indigo);
+    box-shadow: 0 8px 20px -6px var(--glow-ember);
   }
   .plan-name { font-size: var(--step-2); margin-bottom: 0.4rem; }
-  .plan-tagline { color: var(--ink-2); font-size: 0.95rem; line-height: 1.45; min-height: 2.8em; margin-bottom: 1.2rem; }
+  .plan-tagline { color: var(--ink-2); font-size: 0.95rem; line-height: 1.45; min-height: 3.8em; margin-bottom: 1.2rem; }
   .plan-price { display: flex; align-items: baseline; gap: 0.15rem; margin-bottom: 1.4rem; }
   .plan-cur { font-family: var(--font-display); font-size: var(--step-2); font-weight: 700; color: var(--ink-2); }
   .plan-amt { font-family: var(--font-display); font-size: var(--step-4); font-weight: 800; line-height: 1; }
@@ -125,16 +115,16 @@ const plans = [
   .plan-feats { display: flex; flex-direction: column; gap: 0.7rem; }
   .plan-feats li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.95rem; color: var(--ink-2); line-height: 1.4; }
   .plan-feats li:first-child { color: var(--ink); font-weight: 600; }
-  .plan-feats svg { color: var(--accent); flex-shrink: 0; margin-top: 0.25em; }
+  .plan-feats svg { color: var(--primary); flex-shrink: 0; margin-top: 0.25em; }
 
   .pricing-define {
     display: flex; align-items: flex-start; gap: 0.85rem;
-    max-width: 64ch; margin: 2.2rem auto 0;
+    max-width: 64ch; margin: 2.4rem auto 0;
     padding: 1.1rem 1.3rem;
     background: var(--surface); border: 1px solid var(--line-soft);
     border-radius: var(--radius);
   }
-  .define-ic { flex-shrink: 0; color: var(--accent); margin-top: 0.1rem; }
+  .define-ic { flex-shrink: 0; color: var(--primary-hi); margin-top: 0.1rem; }
   .pricing-define p { color: var(--ink-2); font-size: 0.95rem; line-height: 1.55; }
   .pricing-define strong { color: var(--ink); font-weight: 600; }
 

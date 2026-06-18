@@ -2,24 +2,24 @@
 // Genuinely sequential 3-step flow — numbers earn their place here.
 const steps = [
   {
-    n: "1", title: "Connect your inbox",
-    body: "Link Instagram, WhatsApp, Messenger, or SMS in a couple of clicks. No code, no developer, no rewiring your stack.",
+    n: "1", title: "We map your funnel",
+    body: "On a short call we learn your offer, your objections, and where buyers go cold. No homework for your team — we do the build.",
   },
   {
-    n: "2", title: "The AI learns your offer",
-    body: "Paste your website or pricing. DMClosed studies your offer, your tone, and your objections, then writes itself a playbook.",
+    n: "2", title: "We build & train your agent",
+    body: "We connect your channels and calendar, and train the AI on your voice, your pricing, and your objection playbook. Done-for-you.",
   },
   {
     n: "3", title: "Calls land on your calendar",
-    body: "It replies, qualifies, handles pushback, follows up for days, and books the call. You show up and close.",
+    body: "It replies in seconds, qualifies, handles pushback, follows up for days, and books the call. Your team shows up and closes.",
   },
 ];
 ---
 <section class="how section" id="how" aria-labelledby="how-h">
   <div class="container">
     <header class="how-head">
-      <p class="eyebrow reveal">From DM to booked call</p>
-      <h2 id="how-h" class="reveal">Live in fifteen minutes. Closing by tonight.</h2>
+      <p class="kicker reveal">From DM to booked call</p>
+      <h2 id="how-h" class="reveal">Live in days. Closing on autopilot.</h2>
     </header>
 
     <ol class="how-steps">
@@ -54,7 +54,7 @@ const steps = [
   .how-track-fill {
     position: absolute; inset: 0; width: 0;
     background: linear-gradient(90deg, var(--primary-strong), var(--accent-strong));
-    box-shadow: 0 0 12px var(--glow-cyan);
+    box-shadow: 0 0 12px var(--glow-amber);
   }
   .how-step { position: relative; z-index: 1; text-align: center; }
   .how-num {
@@ -72,7 +72,7 @@ const steps = [
     fill: none; stroke: var(--primary-strong); stroke-width: 2.5;
     stroke-dasharray: 188.5; stroke-dashoffset: 188.5;
     transition: stroke-dashoffset 1s var(--ease-out-expo);
-    filter: drop-shadow(0 0 6px var(--glow-indigo));
+    filter: drop-shadow(0 0 6px var(--glow-ember));
   }
   .how-step.is-in .how-ring circle { stroke-dashoffset: 0; }
   .how-title { font-size: var(--step-1); margin-bottom: 0.6rem; }

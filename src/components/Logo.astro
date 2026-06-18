@@ -9,7 +9,9 @@ const { compact = false } = Astro.props;
   .logo { display: inline-flex; align-items: center; }
   .logo img {
     height: 46px; width: auto;
-    filter: drop-shadow(0 4px 14px var(--glow-soft));
+    /* tint the legacy blue mark into the molten-orange brand */
+    filter: hue-rotate(168deg) saturate(1.35) brightness(1.05)
+            drop-shadow(0 4px 16px var(--glow-ember));
   }
   .logo.is-compact img { height: 40px; }
   @media (max-width: 520px) {

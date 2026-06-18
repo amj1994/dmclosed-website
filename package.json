@@ -9,10 +9,12 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^4.16.18",
     "@fontsource/barlow": "^5.1.0",
     "@fontsource/barlow-condensed": "^5.1.0",
+    "@types/three": "^0.184.1",
+    "astro": "^4.16.18",
     "gsap": "^3.12.5",
-    "lenis": "^1.1.18"
+    "lenis": "^1.1.18",
+    "three": "^0.184.0"
   }
 }

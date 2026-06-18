@@ -4,3 +4,7 @@ dist/
 .DS_Store
 .env
 *.log
+
+# scratch video frames
+.workvid/
+.claude/settings.local.json

@@ -1,10 +1,10 @@
 ---
 // Alternating capability rows — each one shows the AI doing the thing.
 ---
-<section class="caps section" aria-labelledby="caps-h">
+<section class="caps section" id="capabilities" aria-labelledby="caps-h">
   <div class="container">
     <header class="caps-head">
-      <p class="eyebrow reveal">Not a chatbot. A closer.</p>
+      <p class="kicker reveal">Not a chatbot. A closer.</p>
       <h2 id="caps-h" class="reveal">Chatbots answer questions.<br />DMClosed closes deals.</h2>
     </header>
 
@@ -88,7 +88,7 @@
   .slots { display: flex; flex-direction: column; gap: 0.55rem; }
   .slots-h { font-size: 0.78rem; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.3rem; }
   .slot { text-align: left; padding: 0.7rem 1rem; border-radius: 12px; background: var(--surface-hi); border: 1px solid var(--line-soft); font-size: 0.92rem; font-weight: 500; color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
-  .slot-pick { background: linear-gradient(135deg, var(--primary), var(--primary-dim)); color: var(--on-primary); border-color: transparent; box-shadow: 0 0 22px -6px var(--glow-indigo); }
+  .slot-pick { background: linear-gradient(135deg, var(--primary), var(--primary-dim)); color: var(--on-primary); border-color: transparent; box-shadow: 0 0 22px -6px var(--glow-ember); }
   .slot-pick em { font-style: normal; font-size: 0.72rem; opacity: 0.85; }
   .slot-confirm { margin-top: 0.4rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--success); font-weight: 600; }
   .slot-tick { width: 20px; height: 20px; border-radius: 50%; background: var(--success); color: var(--bg); display: grid; place-items: center; font-size: 0.7rem; }

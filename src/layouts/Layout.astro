@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "DMClosed — The AI that closes deals in your DMs",
-  description = "DMClosed is an AI sales agent that lives in your Instagram, WhatsApp, and SMS. It replies in seconds, handles objections for days, and books calls on your calendar. 24/7. Start a 7-day free trial.",
+  title = "DMClosed — A done-for-you AI sales agent for your business",
+  description = "DMClosed deploys and operates an AI sales agent across WhatsApp, Instagram, SMS and more. It replies in seconds, handles objections, follows up for days, and books calls onto your calendar — 24/7. Managed for you from $497/mo. Book a demo.",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -33,8 +33,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <meta name="theme-color" content="#0a0a16" />
+    <meta name="theme-color" content="#140a06" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- preload hero poster + video for instant LCP -->
+    <link rel="preload" as="image" href="/media/robot-hero-poster.jpg" />
 
     <!-- JSON-LD: SaaS product -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -44,7 +47,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       "applicationCategory": "BusinessApplication",
       "description": description,
       "operatingSystem": "Web",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "7-day free trial" }
+      "offers": { "@type": "Offer", "price": "497", "priceCurrency": "USD", "description": "Managed AI sales agent — from $497/mo" }
     })} />
 
     <script is:inline>

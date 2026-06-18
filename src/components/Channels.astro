@@ -1,27 +1,35 @@
 ---
 const channels = [
-  { name: "Instagram", note: "DMs + comment-to-DM on posts and reels", key: "ig" },
-  { name: "WhatsApp", note: "Personal and Business API numbers", key: "wa" },
-  { name: "SMS", note: "Text leads back the second they opt in", key: "sms" },
-  { name: "Messenger", note: "Facebook page inbox, fully automated", key: "fb" },
+  { name: "WhatsApp",  note: "Personal & Business API numbers",        key: "wa" },
+  { name: "Instagram", note: "DMs plus comment-to-DM on posts & reels", key: "ig" },
+  { name: "Messenger", note: "Facebook page inbox, fully automated",    key: "fb" },
+  { name: "Telegram",  note: "Bots and direct chats, instant replies",  key: "tg" },
+  { name: "SMS",       note: "Text leads back the second they opt in",  key: "sms" },
+  { name: "iMessage",  note: "Native blue-bubble conversations",         key: "im" },
+  { name: "Email",     note: "Inbound replies handled like a rep",       key: "em" },
+  { name: "Web chat",  note: "On-site widget that books calls",          key: "web" },
 ];
 ---
-<section class="channels section" aria-labelledby="ch-h">
+<section class="channels section" id="channels" aria-labelledby="ch-h">
   <div class="container">
     <header class="ch-head">
-      <p class="eyebrow reveal">Wherever they message you</p>
-      <h2 id="ch-h" class="reveal">One AI. Every inbox your leads use.</h2>
-      <p class="ch-sub reveal">Your leads do not all live in one app. DMClosed works across the channels where buying conversations actually happen, all from a single brain that remembers every contact.</p>
+      <p class="kicker reveal">Wherever they message you</p>
+      <h2 id="ch-h" class="reveal">One agent. Every inbox your buyers use.</h2>
+      <p class="ch-sub reveal">Your prospects don't all live in one app. DMClosed works across every channel where buying conversations actually happen — all from a single brain that remembers each contact.</p>
     </header>
 
     <ul class="ch-grid">
       {channels.map((c) => (
         <li class="ch-card reveal" data-tilt>
           <span class={`ch-ic ch-${c.key}`} aria-hidden="true">
-            {c.key === "ig" && <svg viewBox="0 0 24 24" width="26" height="26"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>}
-            {c.key === "wa" && <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.4A10 10 0 1 0 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5l.8 1.8c0 .2 0 .4-.1.5l-.5.6c-.1.2-.2.3 0 .6a6 6 0 0 0 2.7 2.4c.3.1.4 0 .6-.1l.7-.8c.2-.2.3-.1.5-.1l1.8.9c.2.1.4.2.4.3.1.5-.1 1.4-.5 1.7-.4.3-1.2.7-1.9.5a8.6 8.6 0 0 1-6.3-6.2c-.1-.7 0-1.4.2-1.8Z" fill="currentColor"/></svg>}
-            {c.key === "sms" && <svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 5h16v11H8l-4 3V5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>}
-            {c.key === "fb" && <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m7 13 3-3.2 2.3 1.8L15 9l-2.7 3.2-2.3-1.8L7 13Z" fill="currentColor"/></svg>}
+            {c.key === "wa" && <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.4A10 10 0 1 0 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .6.5l.8 1.8c0 .2 0 .4-.1.5l-.5.6c-.1.2-.2.3 0 .6a6 6 0 0 0 2.7 2.4c.3.1.4 0 .6-.1l.7-.8c.2-.2.3-.1.5-.1l1.8.9c.2.1.4.2.4.3.1.5-.1 1.4-.5 1.7-.4.3-1.2.7-1.9.5a8.6 8.6 0 0 1-6.3-6.2c-.1-.7 0-1.4.2-1.8Z" fill="currentColor"/></svg>}
+            {c.key === "ig" && <svg viewBox="0 0 24 24" width="24" height="24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>}
+            {c.key === "fb" && <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.3 1.9.4 2.9.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m7 13 3-3.2 2.3 1.8L15 9l-2.7 3.2-2.3-1.8L7 13Z" fill="currentColor"/></svg>}
+            {c.key === "tg" && <svg viewBox="0 0 24 24" width="24" height="24"><path d="M21 4 3 11l5 2 2 6 3-4 4 3 4-14Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m8 13 9-6-6 7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>}
+            {c.key === "sms" && <svg viewBox="0 0 24 24" width="24" height="24"><path d="M4 5h16v11H8l-4 3V5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>}
+            {c.key === "im" && <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 3c5 0 9 3.4 9 7.6 0 4.2-4 7.6-9 7.6a11 11 0 0 1-2.6-.3L5 20l1-3.2A7 7 0 0 1 3 10.6C3 6.4 7 3 12 3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>}
+            {c.key === "em" && <svg viewBox="0 0 24 24" width="24" height="24"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            {c.key === "web" && <svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>}
           </span>
           <h3 class="ch-name">{c.name}</h3>
           <p class="ch-note">{c.note}</p>
@@ -34,28 +42,33 @@ const channels = [
 
 <style>
   .ch-head { text-align: center; margin-bottom: clamp(2.5rem, 1rem + 4vw, 4rem); }
+  .ch-head .kicker { justify-content: center; }
   .ch-head h2 { font-size: var(--step-3); margin: 0.8rem 0 1rem; }
   .ch-sub { color: var(--ink-2); font-size: var(--step-1); max-width: 56ch; margin-inline: auto; line-height: 1.55; }
 
-  .ch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  .ch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
   @media (max-width: 900px) { .ch-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 460px) { .ch-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 440px) { .ch-grid { grid-template-columns: 1fr; } }
   .ch-card {
     background: linear-gradient(180deg, var(--surface-2), var(--surface));
     border: 1px solid var(--line); border-radius: var(--radius-lg);
-    padding: 1.6rem 1.4rem;
+    padding: 1.5rem 1.3rem;
     transition: transform var(--dur-fast) var(--ease-out-quart), border-color var(--dur-fast), box-shadow var(--dur-fast);
   }
-  .ch-card:hover { transform: translateY(-6px); border-color: var(--primary-dim); box-shadow: 0 24px 50px -24px var(--glow-indigo); }
-  .ch-ic { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 1.1rem; color: var(--on-primary); }
-  .ch-ig { background: linear-gradient(135deg, #b537d6, #fd5d2c); }
+  .ch-card:hover { transform: translateY(-6px); border-color: var(--primary-dim); box-shadow: 0 24px 50px -24px var(--glow-ember); }
+  .ch-ic { width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 1rem; color: #fff; }
   .ch-wa { background: linear-gradient(135deg, #1faa55, #25d366); }
-  .ch-sms { background: linear-gradient(135deg, var(--primary-strong), var(--accent-strong)); }
+  .ch-ig { background: linear-gradient(135deg, #b537d6, #fd5d2c); }
   .ch-fb { background: linear-gradient(135deg, #1f6bff, #0a4bd6); }
+  .ch-tg { background: linear-gradient(135deg, #2aabee, #229ed9); }
+  .ch-sms { background: linear-gradient(135deg, var(--primary-hi), var(--ember)); }
+  .ch-im { background: linear-gradient(135deg, #34c759, #30b350); }
+  .ch-em { background: linear-gradient(135deg, var(--accent), var(--primary)); color: var(--on-primary); }
+  .ch-web { background: linear-gradient(135deg, var(--surface-hi), var(--primary-dim)); }
   .ch-name { font-size: var(--step-1); margin-bottom: 0.4rem; }
-  .ch-note { color: var(--ink-2); font-size: 0.92rem; line-height: 1.5; margin-bottom: 1.1rem; min-height: 2.8em; }
+  .ch-note { color: var(--ink-2); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1rem; min-height: 2.8em; }
   .ch-live { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; font-weight: 600; color: var(--success); }
   .ch-live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 0 var(--success); animation: chpulse 2.6s infinite; }
-  @keyframes chpulse { 0%{box-shadow:0 0 0 0 oklch(0.74 0.17 150 / 0.6)} 70%{box-shadow:0 0 0 6px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+  @keyframes chpulse { 0%{box-shadow:0 0 0 0 oklch(0.78 0.16 150 / 0.6)} 70%{box-shadow:0 0 0 6px transparent} 100%{box-shadow:0 0 0 0 transparent} }
   @media (prefers-reduced-motion: reduce) { .ch-live-dot { animation: none; } }
 </style>

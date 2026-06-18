@@ -6,12 +6,12 @@ import Logo from "./Logo.astro";
     <Logo />
     <nav class="nav-links" aria-label="Primary">
       <a href="#how">How it works</a>
-      <a href="#proof">Proof</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#channels">Channels</a>
       <a href="#pricing">Pricing</a>
     </nav>
     <div class="nav-cta">
-      <a href="#pricing" class="nav-login">Sign in</a>
-      <a href="#pricing" class="btn btn-primary nav-btn">Start free trial</a>
+      <a href="#pricing" class="btn btn-primary nav-btn" data-magnetic>Book a demo</a>
     </div>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" data-nav-toggle>
       <span></span><span></span>
@@ -19,9 +19,10 @@ import Logo from "./Logo.astro";
   </div>
   <nav class="nav-mobile" aria-label="Mobile" data-nav-mobile>
     <a href="#how">How it works</a>
-    <a href="#proof">Proof</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#channels">Channels</a>
     <a href="#pricing">Pricing</a>
-    <a href="#pricing" class="btn btn-primary">Start free trial</a>
+    <a href="#pricing" class="btn btn-primary">Book a demo</a>
   </nav>
 </header>
 
@@ -35,7 +36,7 @@ import Logo from "./Logo.astro";
     border-bottom: 1px solid transparent;
   }
   .nav[data-scrolled] {
-    background: oklch(0.09 0.012 274 / 0.72);
+    background: oklch(0.10 0.018 42 / 0.72);
     backdrop-filter: blur(14px) saturate(1.2);
     border-bottom-color: var(--line-soft);
   }
@@ -50,15 +51,13 @@ import Logo from "./Logo.astro";
   }
   .nav-links a::after {
     content: ""; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0;
-    background: var(--accent); transition: width var(--dur-fast) var(--ease-out-quart);
+    background: var(--primary); transition: width var(--dur-fast) var(--ease-out-quart);
   }
   .nav-links a:hover { color: var(--ink); }
   .nav-links a:hover::after { width: 100%; }
 
   .nav-cta { display: flex; align-items: center; gap: 1.1rem; }
-  .nav-login { font-weight: 500; color: var(--ink-2); transition: color var(--dur-fast); }
-  .nav-login:hover { color: var(--ink); }
-  .nav-btn { padding: 0.6em 1.15em; font-size: var(--step--1); }
+  .nav-btn { padding: 0.6em 1.2em; font-size: var(--step--1); }
 
   .nav-toggle { display: none; width: 44px; height: 44px; flex-direction: column; gap: 5px; align-items: center; justify-content: center; }
   .nav-toggle span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform var(--dur-fast) var(--ease-out-quart), opacity var(--dur-fast); }
@@ -68,7 +67,7 @@ import Logo from "./Logo.astro";
   .nav-mobile {
     display: none; flex-direction: column; gap: 0.25rem;
     padding: 1rem var(--container) 1.5rem;
-    background: oklch(0.09 0.012 274 / 0.96);
+    background: oklch(0.10 0.018 42 / 0.96);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line-soft);
   }
