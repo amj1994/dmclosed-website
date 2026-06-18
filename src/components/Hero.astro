@@ -1,29 +1,18 @@
 ---
-// Hero — robot video centerpiece + THREE.js ambient field + B2B copy
+// Hero — solid-black stage, robot floating in a red glow, B2B copy
 ---
 <section class="hero" id="top">
-  <!-- WebGL ambient field (initialised in motion.js, decorative) -->
-  <canvas class="hero-three" data-three-hero aria-hidden="true"></canvas>
-
-  <!-- ambient gradient layer -->
-  <div class="hero-bg" aria-hidden="true">
-    <span class="ember ember-1"></span>
-    <span class="ember ember-2"></span>
-    <span class="grid-lines"></span>
-  </div>
-
   <div class="hero-inner container">
     <div class="hero-copy">
-      <p class="kicker hero-kicker" data-hero="0">AI sales agent · done&#8209;for&#8209;you</p>
+      <p class="kicker hero-kicker" data-hero="0">AI sales agent · done&#8209;for&#8209;you · live in days</p>
       <h1 class="hero-h1" data-split>
-        <span>Your DMs are</span>
-        <span>full of buyers.</span>
-        <span class="hl">Close them on autopilot.</span>
+        <span>Your DMs just</span>
+        <span>hired a <em>closer.</em></span>
       </h1>
       <p class="hero-sub" data-hero="1">
-        DMClosed deploys a done&#8209;for&#8209;you AI sales agent across every channel your
-        buyers actually use. It replies in seconds, handles objections, follows up for days,
-        and books calls straight onto your calendar — 24/7, no rep required.
+        We build, train, and run an AI sales rep inside your Instagram, WhatsApp, and SMS.
+        It replies in seconds, handles objections, and books qualified calls on your calendar —
+        24/7. Your team just shows up and closes.
       </p>
       <div class="hero-actions" data-hero="2">
         <a href="#pricing" class="btn btn-primary btn-lg btn-arrow" data-magnetic>
@@ -39,9 +28,10 @@
       </ul>
     </div>
 
-    <!-- robot video stage -->
+    <!-- robot, floating in a red glow on solid black -->
     <div class="hero-stage" data-hero="4">
-      <div class="robot-frame">
+      <span class="robot-halo" aria-hidden="true"></span>
+      <div class="robot-wrap">
         <video
           class="robot-video"
           data-robot
@@ -51,19 +41,6 @@
           <source src="/media/robot-hero.webm" type="video/webm" />
           <source src="/media/robot-hero.mp4" type="video/mp4" />
         </video>
-        <span class="robot-glow" aria-hidden="true"></span>
-        <span class="robot-scan" aria-hidden="true"></span>
-        <span class="robot-ring" aria-hidden="true"></span>
-      </div>
-
-      <div class="chip chip-a" data-float>
-        <span class="chip-pulse"></span> Replied in 6s
-      </div>
-      <div class="chip chip-b" data-float>
-        <span class="chip-ic">$</span> $40K deal · closed in chat
-      </div>
-      <div class="chip chip-c" data-float>
-        <span class="chip-dot"></span> Call booked · Fri 11:00
       </div>
     </div>
   </div>
@@ -82,50 +59,30 @@
     padding-top: clamp(7rem, 6rem + 6vw, 10rem);
     padding-bottom: var(--space-section);
     overflow: clip;
+    background: #000;            /* solid black stage */
   }
   .hero-inner {
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: 1.02fr 1fr;
+    grid-template-columns: 1.05fr 1fr;
     gap: clamp(2rem, 1rem + 4vw, 5rem);
     align-items: center;
   }
 
-  /* ---------- WebGL + ambient ---------- */
-  .hero-three { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; opacity: 0.9; }
-  .hero-bg { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-  .ember { position: absolute; border-radius: 50%; filter: blur(75px); }
-  .ember-1 { width: 48vw; height: 48vw; right: -14vw; top: -10vw;
-    background: radial-gradient(circle at 50% 50%, var(--glow-ember), transparent 70%);
-    animation: drift1 20s ease-in-out infinite; }
-  .ember-2 { width: 34vw; height: 34vw; left: -12vw; bottom: -12vw;
-    background: radial-gradient(circle at 50% 50%, var(--glow-soft), transparent 72%);
-    animation: drift2 26s ease-in-out infinite; }
-  .grid-lines {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(var(--line-soft) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-    background-size: 68px 68px;
-    mask-image: radial-gradient(ellipse 70% 60% at 60% 35%, #000 0%, transparent 78%);
-    opacity: 0.22;
-  }
-  @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-3vw,3vw) scale(1.08)} }
-  @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(3vw,-3vw) scale(1.12)} }
-
   /* ---------- copy ---------- */
   .hero-copy { position: relative; }
   .hero-kicker { margin-bottom: 1.3rem; }
-  .hero-h1 { font-size: var(--step-5); margin-bottom: 1.6rem; }
+  .hero-h1 { font-size: var(--step-5); margin-bottom: 1.6rem; line-height: 0.94; }
   .hero-h1 span { display: block; }
-  .hero-h1 .hl {
+  .hero-h1 em {
+    font-style: italic;
     color: var(--primary);
-    text-shadow: 0 0 38px var(--glow-primary);
+    text-shadow: 0 0 42px var(--glow-primary);
   }
   .hero-sub {
     font-size: var(--step-1); color: var(--ink-2); line-height: 1.5;
-    max-width: 42ch; margin-bottom: 2rem; font-weight: 400;
+    max-width: 44ch; margin-bottom: 2rem; font-weight: 400;
   }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 1.9rem; }
   .hero-trust { display: flex; flex-wrap: wrap; gap: 1.3rem; }
@@ -133,72 +90,30 @@
   .hero-trust svg { color: var(--primary); }
 
   /* ---------- robot stage ---------- */
-  .hero-stage { position: relative; }
-  .robot-frame {
-    position: relative;
-    border-radius: var(--radius-xl);
+  .hero-stage { position: relative; display: grid; place-items: center; min-height: 460px; }
+  /* big localized red/orange glow behind the robot */
+  .robot-halo {
+    position: absolute; z-index: 0;
+    width: 92%; aspect-ratio: 1; border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 50%, var(--ember) 0%, oklch(0.585 0.215 33 / 0.6) 22%, oklch(0.585 0.215 33 / 0.22) 45%, transparent 66%);
+    filter: blur(26px);
+    opacity: 0.9;
+    animation: haloPulse 7s ease-in-out infinite;
+  }
+  @keyframes haloPulse { 0%,100%{ transform: scale(1); opacity: 0.85 } 50%{ transform: scale(1.05); opacity: 1 } }
+  .robot-wrap {
+    position: relative; z-index: 1;
+    width: min(540px, 100%); aspect-ratio: 1 / 1;
     overflow: hidden;
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-lg), 0 0 90px -30px var(--glow-ember),
-                inset 0 1px 0 oklch(1 0 0 / 0.06);
-    background: var(--bg-deep);
-    aspect-ratio: 1212 / 681;
-    isolation: isolate;
   }
   .robot-video {
     width: 100%; height: 100%;
-    object-fit: cover;
-    /* fade the frame's outer edges so the robot melts into the page */
-    -webkit-mask-image: radial-gradient(125% 130% at 50% 42%, #000 58%, transparent 100%);
-    mask-image: radial-gradient(125% 130% at 50% 42%, #000 58%, transparent 100%);
+    object-fit: cover; object-position: center 32%;
+    /* melt the robot into the black background — no card, no border */
+    -webkit-mask-image: radial-gradient(68% 78% at 50% 40%, #000 36%, rgba(0,0,0,0.5) 60%, transparent 78%);
+    mask-image: radial-gradient(68% 78% at 50% 40%, #000 36%, rgba(0,0,0,0.5) 60%, transparent 78%);
   }
-  .robot-glow {
-    position: absolute; inset: 0; z-index: 2; pointer-events: none;
-    background: radial-gradient(80% 60% at 50% 120%, var(--glow-ember), transparent 65%);
-    mix-blend-mode: screen; opacity: 0.7;
-  }
-  /* moving scanline sheen */
-  .robot-scan {
-    position: absolute; inset: -40% 0; z-index: 3; pointer-events: none;
-    background: linear-gradient(180deg, transparent 0%, oklch(0.84 0.15 78 / 0.10) 48%, transparent 52%);
-    animation: scan 6.5s linear infinite;
-    mix-blend-mode: screen;
-  }
-  .robot-ring {
-    position: absolute; inset: 0; z-index: 4; pointer-events: none;
-    border-radius: inherit;
-    box-shadow: inset 0 0 0 1px oklch(0.84 0.15 78 / 0.10);
-  }
-  @keyframes scan { 0%{transform:translateY(-40%)} 100%{transform:translateY(140%)} }
-
-  /* floating proof chips */
-  .chip {
-    position: absolute; z-index: 6;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.55rem 0.9rem; border-radius: var(--radius-pill);
-    background: oklch(0.155 0.026 46 / 0.78); backdrop-filter: blur(10px);
-    border: 1px solid var(--line); font-size: 0.82rem; font-weight: 600; white-space: nowrap;
-    color: var(--ink);
-    box-shadow: 0 14px 34px -14px oklch(0 0 0 / 0.7);
-  }
-  .chip-pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--success);
-    box-shadow: 0 0 0 0 var(--success); animation: pulse 2.2s infinite; }
-  .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
-  .chip-ic {
-    width: 19px; height: 19px; border-radius: 6px; display: grid; place-items: center;
-    font-size: 0.74rem; font-weight: 800; color: var(--on-primary);
-    background: linear-gradient(135deg, var(--accent), var(--primary));
-  }
-  .chip-a { top: 8%; left: -7%; }
-  .chip-b { bottom: 16%; left: -9%; }
-  .chip-c { bottom: 8%; right: -5%; }
-
-  @keyframes pulse { 0%{box-shadow:0 0 0 0 var(--success)} 70%{box-shadow:0 0 0 7px transparent} 100%{box-shadow:0 0 0 0 transparent} }
-
-  [data-float] { animation: floaty 6s ease-in-out infinite; }
-  .chip-b[data-float] { animation-duration: 7.5s; animation-delay: -2s; }
-  .chip-c[data-float] { animation-duration: 8.5s; animation-delay: -4s; }
-  @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
   /* scroll cue */
   .hero-scroll {
@@ -212,23 +127,22 @@
   @keyframes scrolldot { 0%,100%{transform:translateY(0); opacity:1} 60%{transform:translateY(12px); opacity:0.2} }
 
   @media (max-width: 980px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
     .hero-copy { text-align: center; }
     .hero-sub { margin-inline: auto; }
     .hero-actions, .hero-trust { justify-content: center; }
-    .hero-h1 .hl { text-wrap: balance; }
     .hero-kicker { display: inline-flex; }
-    .chip-a { left: 2%; } .chip-b { left: 0%; } .chip-c { right: 2%; }
+    .robot-wrap { width: min(420px, 82%); }
   }
   @media (max-width: 560px) {
     .hero { min-height: auto; padding-top: 7rem; }
-    .hero-h1 { font-size: clamp(2.6rem, 2rem + 5vw, 3.4rem); }
+    .hero-h1 { font-size: clamp(2.7rem, 2rem + 6vw, 3.6rem); }
     .hero-sub { font-size: var(--step-0); }
     .hero-trust { gap: 0.9rem; }
     .hero-scroll { display: none; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ember, [data-float], .chip-pulse, .robot-scan, .hero-scroll span { animation: none !important; }
+    .robot-halo, .hero-scroll span { animation: none !important; }
   }
 </style>
