@@ -1,0 +1,135 @@
+---
+// Cute brand robot mascot — pure SVG (crisp at any size), animated.
+// variant: float | wave | peek | think | sleep
+interface Props { variant?: string; class?: string; flip?: boolean; }
+const { variant = "float", class: cls = "", flip = false } = Astro.props;
+const uid = "r" + Math.random().toString(36).slice(2, 8);
+---
+<div class={`mascot mascot-${variant} ${flip ? "is-flip" : ""} ${cls}`} data-mascot aria-hidden="true">
+  <svg viewBox="0 0 240 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id={`shell-${uid}`} x1="0.2" y1="0" x2="0.8" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="0.55" stop-color="#eceef2"/>
+        <stop offset="1" stop-color="#c6c9d2"/>
+      </linearGradient>
+      <linearGradient id={`accent-${uid}`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#FFB24A"/>
+        <stop offset="1" stop-color="#E2391F"/>
+      </linearGradient>
+      <radialGradient id={`visor-${uid}`} cx="0.5" cy="0.42" r="0.75">
+        <stop offset="0" stop-color="#2a1108"/>
+        <stop offset="1" stop-color="#0b0603"/>
+      </radialGradient>
+      <radialGradient id={`eye-${uid}`} cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="#FFD9A0"/>
+        <stop offset="0.4" stop-color="#FF8C25"/>
+        <stop offset="1" stop-color="#E2391F"/>
+      </radialGradient>
+      <radialGradient id={`floor-${uid}`} cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="#E2391F" stop-opacity="0.5"/>
+        <stop offset="1" stop-color="#E2391F" stop-opacity="0"/>
+      </radialGradient>
+      <filter id={`glow-${uid}`} x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3.2" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- ground glow -->
+    <ellipse class="m-floor" cx="120" cy="286" rx="78" ry="13" fill={`url(#floor-${uid})`}/>
+
+    <!-- arms -->
+    <g class="m-arm m-arm-l">
+      <rect x="34" y="176" width="26" height="64" rx="13" fill={`url(#shell-${uid})`} stroke="#b9bcc6" stroke-width="1.5"/>
+      <circle cx="47" cy="240" r="15" fill={`url(#shell-${uid})`} stroke="#b9bcc6" stroke-width="1.5"/>
+      <rect x="40" y="186" width="14" height="5" rx="2.5" fill={`url(#accent-${uid})`}/>
+    </g>
+    <g class="m-arm m-arm-r">
+      <rect x="180" y="176" width="26" height="64" rx="13" fill={`url(#shell-${uid})`} stroke="#b9bcc6" stroke-width="1.5"/>
+      <circle cx="193" cy="240" r="15" fill={`url(#shell-${uid})`} stroke="#b9bcc6" stroke-width="1.5"/>
+      <rect x="186" y="186" width="14" height="5" rx="2.5" fill={`url(#accent-${uid})`}/>
+    </g>
+
+    <!-- body -->
+    <g class="m-body">
+      <path d="M78 168 Q120 156 162 168 L172 246 Q120 264 68 246 Z" fill={`url(#shell-${uid})`} stroke="#b9bcc6" stroke-width="1.6"/>
+      <rect x="96" y="186" width="48" height="34" rx="12" fill={`url(#visor-${uid})`}/>
+      <circle cx="120" cy="203" r="9" fill={`url(#accent-${uid})`} filter={`url(#glow-${uid})`}/>
+      <rect x="92" y="232" width="56" height="5" rx="2.5" fill="#cfd2da"/>
+    </g>
+
+    <!-- head -->
+    <g class="m-head">
+      <line x1="120" y1="36" x2="120" y2="16" stroke="#b9bcc6" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="120" cy="12" r="7" fill={`url(#accent-${uid})`} filter={`url(#glow-${uid})`}/>
+      <!-- ears -->
+      <rect x="30" y="92" width="18" height="40" rx="9" fill={`url(#accent-${uid})`}/>
+      <rect x="192" y="92" width="18" height="40" rx="9" fill={`url(#accent-${uid})`}/>
+      <!-- dome -->
+      <rect x="44" y="34" width="152" height="128" rx="58" fill={`url(#shell-${uid})`} stroke="#b9bcc6" stroke-width="1.8"/>
+      <!-- visor -->
+      <rect x="64" y="62" width="112" height="78" rx="34" fill={`url(#visor-${uid})`}/>
+      <rect x="64" y="62" width="112" height="78" rx="34" fill="none" stroke={`url(#accent-${uid})`} stroke-width="2.5" opacity="0.65"/>
+      <!-- eyes + smile -->
+      <g class="m-face" filter={`url(#glow-${uid})`} fill={`url(#eye-${uid})`}>
+        <rect class="m-eye m-eye-l" x="92" y="86" width="15" height="26" rx="7.5"/>
+        <rect class="m-eye m-eye-r" x="133" y="86" width="15" height="26" rx="7.5"/>
+      </g>
+      <path class="m-smile" d="M104 120 Q120 130 136 120" stroke={`url(#eye-${uid})`} stroke-width="4" stroke-linecap="round" fill="none" filter={`url(#glow-${uid})`}/>
+      <!-- cheek highlight -->
+      <ellipse cx="74" cy="64" rx="14" ry="9" fill="#ffffff" opacity="0.55"/>
+    </g>
+
+    <!-- Zzz (sleep variant only) -->
+    <g class="m-zzz" fill={`url(#accent-${uid})`} font-family="var(--font-display), sans-serif" font-weight="800">
+      <text x="186" y="64" font-size="20" class="m-z m-z1">z</text>
+      <text x="202" y="44" font-size="26" class="m-z m-z2">z</text>
+      <text x="220" y="22" font-size="32" class="m-z m-z3">z</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .mascot { display: inline-block; width: 100%; height: 100%; }
+  .mascot.is-flip { transform: scaleX(-1); }
+  .mascot svg { width: 100%; height: 100%; overflow: visible; }
+
+  /* idle float of the whole robot + soft floor pulse */
+  .mascot svg { animation: mFloat 5s ease-in-out infinite; }
+  .m-floor { animation: mFloor 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes mFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes mFloor { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.86); opacity: 0.7; } }
+
+  /* head bob slightly out of phase */
+  .m-head { transform-box: fill-box; transform-origin: 50% 92%; animation: mBob 5s ease-in-out infinite; }
+  @keyframes mBob { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-2.5deg); } }
+
+  /* blinking eyes */
+  .m-eye { transform-box: fill-box; transform-origin: center; animation: mBlink 4.2s infinite; }
+  @keyframes mBlink { 0%,92%,100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
+
+  /* wave variant: right arm raises beside the head and wiggles */
+  .mascot-wave .m-arm-r { transform-box: fill-box; transform-origin: 50% 9%; animation: mWave 2.2s ease-in-out infinite; }
+  @keyframes mWave { 0%,100% { transform: rotate(150deg); } 50% { transform: rotate(171deg); } }
+
+  /* think variant: slow head tilt, hand near chin (uses left arm up) */
+  .mascot-think .m-head { animation: mThink 4s ease-in-out infinite; }
+  @keyframes mThink { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+  /* sleep variant: dim eyes, gentle sway, no blink, floating Zzz */
+  .mascot-sleep .m-eye { animation: none; transform: scaleY(0.18); transform-box: fill-box; transform-origin: center; }
+  .mascot-sleep .m-smile { opacity: 0.5; }
+  .mascot-sleep svg { animation: mSleep 6s ease-in-out infinite; }
+  @keyframes mSleep { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-5px) rotate(2deg); } }
+  .m-zzz { opacity: 0; }
+  .mascot-sleep .m-zzz { opacity: 1; }
+  .mascot-sleep .m-z { transform-box: fill-box; transform-origin: center; animation: mZ 3s ease-in-out infinite; }
+  .mascot-sleep .m-z2 { animation-delay: 0.5s; }
+  .mascot-sleep .m-z3 { animation-delay: 1s; }
+  @keyframes mZ { 0% { opacity: 0; transform: translateY(6px) scale(0.7); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px) scale(1.1); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mascot svg, .m-floor, .m-head, .m-eye, .mascot-wave .m-arm-r, .mascot-think .m-head, .mascot-sleep svg { animation: none !important; }
+  }
+</style>

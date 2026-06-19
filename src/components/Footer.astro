@@ -1,8 +1,28 @@
 ---
 import Logo from "./Logo.astro";
+import Robot from "./Robot.astro";
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
+  <!-- peeking robot sits behind the CTA bar and pokes over the top -->
+  <span class="footer-robot" data-peek><Robot variant="float" /></span>
+
+  <div class="footer-cta">
+    <div class="container footer-cta-inner">
+      <div class="fc-brand">
+        <Logo />
+        <p class="fc-line">AI sales agent. Done-for-you. Live in days.</p>
+      </div>
+      <div class="fc-pitch reveal">
+        <p>More conversations.<br />More qualified leads.<br /><span class="text-primary">More closed deals.</span></p>
+      </div>
+      <a href="#pricing" class="btn btn-primary btn-arrow fc-btn" data-magnetic>
+        Book a demo
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
   <div class="container footer-inner">
     <div class="footer-brand">
       <Logo />
@@ -31,21 +51,54 @@ const year = new Date().getFullYear();
   </div>
   <div class="container footer-bottom">
     <span>© {year} DMClosed. All rights reserved.</span>
-    <a href="#pricing" class="footer-cta">Book a demo →</a>
+    <a href="#pricing" class="footer-cta-link">Book a demo →</a>
   </div>
 </footer>
 
 <style>
-  .footer { background: var(--bg-deep); border-top: 1px solid var(--line-soft); padding-top: clamp(3rem, 2rem + 3vw, 4.5rem); }
-  .footer-inner { display: grid; grid-template-columns: 1.4fr 2fr; gap: 2.5rem; padding-bottom: 2.5rem; }
+  .footer { background: var(--bg-deep); position: relative; }
+
+  /* peeking robot */
+  .footer-robot {
+    position: absolute; left: 50%; top: 0; z-index: 0;
+    width: 150px; height: 188px;
+    transform: translate(-50%, -56%);
+    pointer-events: none;
+  }
+
+  /* CTA bar */
+  .footer-cta {
+    position: relative; z-index: 1;
+    background:
+      radial-gradient(80% 140% at 50% 0%, oklch(0.585 0.215 33 / 0.28), transparent 70%),
+      linear-gradient(180deg, var(--surface), var(--bg-deep));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .footer-cta-inner {
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    padding-block: clamp(1.8rem, 1.2rem + 2vw, 2.8rem);
+  }
+  .fc-brand { display: grid; gap: 0.6rem; }
+  .fc-line { color: var(--ink-2); font-size: 0.95rem; }
+  .fc-pitch p { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 1rem + 1.4vw, 1.9rem); line-height: 1.08; letter-spacing: -0.01em; }
+  .fc-btn { flex-shrink: 0; }
+
+  .footer-inner { display: grid; grid-template-columns: 1.4fr 2fr; gap: 2.5rem; padding-block: 2.6rem; }
   .footer-tag { color: var(--muted); margin-top: 1rem; max-width: 38ch; line-height: 1.55; font-size: 0.95rem; }
   .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .footer-col h4 { font-family: var(--font-body); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; font-weight: 700; }
   .footer-col a { display: block; color: var(--ink-2); padding: 0.35rem 0; font-size: 0.95rem; transition: color var(--dur-fast); }
   .footer-col a:hover { color: var(--primary-hi); }
-  .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-block: 1.5rem; border-top: 1px solid var(--line-soft); margin-top: 1rem; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-block: 1.5rem; border-top: 1px solid var(--line-soft); }
   .footer-bottom span { color: var(--muted); font-size: 0.88rem; }
-  .footer-cta { color: var(--primary-hi); font-weight: 700; font-size: 0.92rem; }
+  .footer-cta-link { color: var(--primary-hi); font-weight: 700; font-size: 0.92rem; }
+
+  @media (max-width: 820px) {
+    .footer-cta-inner { flex-direction: column; text-align: center; gap: 1.2rem; padding-top: 3.2rem; }
+    .fc-brand { justify-items: center; }
+    .footer-robot { width: 120px; height: 150px; transform: translate(-50%, -52%); }
+  }
   @media (max-width: 720px) {
     .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }

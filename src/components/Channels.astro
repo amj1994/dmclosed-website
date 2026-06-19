@@ -1,4 +1,5 @@
 ---
+import Robot from "./Robot.astro";
 const channels = [
   { name: "WhatsApp",  note: "Personal & Business API numbers",        key: "wa" },
   { name: "Instagram", note: "DMs plus comment-to-DM on posts & reels", key: "ig" },
@@ -13,6 +14,7 @@ const channels = [
 <section class="channels section" id="channels" aria-labelledby="ch-h">
   <div class="container">
     <header class="ch-head">
+      <span class="ch-robot reveal"><Robot variant="float" /></span>
       <p class="kicker reveal">Wherever they message you</p>
       <h2 id="ch-h" class="reveal">One agent. Every inbox your buyers use.</h2>
       <p class="ch-sub reveal">Your prospects don't all live in one app. DMClosed works across every channel where buying conversations actually happen — all from a single brain that remembers each contact.</p>
@@ -42,6 +44,7 @@ const channels = [
 
 <style>
   .ch-head { text-align: center; margin-bottom: clamp(2.5rem, 1rem + 4vw, 4rem); }
+  .ch-robot { display: block; width: 120px; height: 150px; margin: 0 auto 0.4rem; }
   .ch-head .kicker { justify-content: center; }
   .ch-head h2 { font-size: var(--step-3); margin: 0.8rem 0 1rem; }
   .ch-sub { color: var(--ink-2); font-size: var(--step-1); max-width: 56ch; margin-inline: auto; line-height: 1.55; }
