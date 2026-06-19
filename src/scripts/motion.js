@@ -123,10 +123,12 @@ if (reduceMotion) {
   /* ---- Hero media parallax: cinematic zoom-out as you leave the hero ---- */
   const heroVideo = document.querySelector(".hero-video");
   if (heroVideo) {
-    gsap.to(heroVideo, {
-      yPercent: 10, scale: 1.16, ease: "none",
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 },
-    });
+    // robot pushes in / comes closer as you scroll from the hero to the next section
+    gsap.fromTo(heroVideo,
+      { scale: 1.02, yPercent: 0 },
+      { scale: 1.32, yPercent: 6, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 } }
+    );
   }
 
   /* ---- Apple-style reveals: fade + rise + de-blur, staggered in batches ----

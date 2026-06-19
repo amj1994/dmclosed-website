@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1440" viewBox="0 0 1440 1440" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1440" height="1440" fill="#0A0503"/>
+  <text x="80" y="110" fill="#FBF5ED" font-size="52" font-weight="700">DMClosed — Brand Palette</text>
+  <text x="82" y="156" fill="#AA9B92" font-size="24">Orange-drench on cinematic near-black. Source of truth: src/styles/tokens.css (OKLCH).</text>
+
+  <!-- BRAND -->
+  <text x="80" y="250" fill="#FD6F00" font-size="26" font-weight="700" letter-spacing="3">BRAND</text>
+  <g transform="translate(80,280)">
+    <g><rect width="300" height="180" rx="20" fill="#FD6F00"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Primary</text><text x="6" y="252" fill="#AA9B92" font-size="22">#FD6F00</text></g>
+    <g transform="translate(335,0)"><rect width="300" height="180" rx="20" fill="#FF8C25"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Primary hover</text><text x="6" y="252" fill="#AA9B92" font-size="22">#FF8C25</text></g>
+    <g transform="translate(670,0)"><rect width="300" height="180" rx="20" fill="#DE2E02"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Ember</text><text x="6" y="252" fill="#AA9B92" font-size="22">#DE2E02</text></g>
+    <g transform="translate(1005,0)"><rect width="300" height="180" rx="20" fill="#FFBD47"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Accent (amber)</text><text x="6" y="252" fill="#AA9B92" font-size="22">#FFBD47</text></g>
+  </g>
+
+  <!-- SURFACES & TEXT -->
+  <text x="80" y="630" fill="#FD6F00" font-size="26" font-weight="700" letter-spacing="3">SURFACES &amp; TEXT</text>
+  <g transform="translate(80,660)">
+    <g><rect width="300" height="180" rx="20" fill="#000000" stroke="#2A1A12" stroke-width="2"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Hero / black</text><text x="6" y="252" fill="#AA9B92" font-size="22">#000000</text></g>
+    <g transform="translate(335,0)"><rect width="300" height="180" rx="20" fill="#090301" stroke="#2A1A12" stroke-width="2"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Background</text><text x="6" y="252" fill="#AA9B92" font-size="22">#090301</text></g>
+    <g transform="translate(670,0)"><rect width="300" height="180" rx="20" fill="#150904" stroke="#2A1A12" stroke-width="2"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Surface / cards</text><text x="6" y="252" fill="#AA9B92" font-size="22">#150904</text></g>
+    <g transform="translate(1005,0)"><rect width="300" height="180" rx="20" fill="#FBF5ED"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Ink (text)</text><text x="6" y="252" fill="#AA9B92" font-size="22">#FBF5ED</text></g>
+  </g>
+
+  <!-- SUPPORTING -->
+  <text x="80" y="1010" fill="#FD6F00" font-size="26" font-weight="700" letter-spacing="3">SUPPORTING</text>
+  <g transform="translate(80,1040)">
+    <g><rect width="300" height="180" rx="20" fill="#D2C6BE"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Ink secondary</text><text x="6" y="252" fill="#AA9B92" font-size="22">#D2C6BE</text></g>
+    <g transform="translate(335,0)"><rect width="300" height="180" rx="20" fill="#AA9B92"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Muted</text><text x="6" y="252" fill="#AA9B92" font-size="22">#AA9B92</text></g>
+    <g transform="translate(670,0)"><rect width="300" height="180" rx="20" fill="#5FD37F"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Success</text><text x="6" y="252" fill="#AA9B92" font-size="22">#5FD37F</text></g>
+    <g transform="translate(1005,0)"><rect width="300" height="180" rx="20" fill="#1A0B06" stroke="#2A1A12" stroke-width="2"/><text x="6" y="222" fill="#FBF5ED" font-size="24" font-weight="700">Text on orange</text><text x="6" y="252" fill="#AA9B92" font-size="22">#1A0B06</text></g>
+  </g>
+
+  <line x1="80" y1="1330" x2="1360" y2="1330" stroke="#2A1A12" stroke-width="2"/>
+  <text x="80" y="1390" fill="#FBF5ED" font-size="24" font-weight="700">Fonts</text>
+  <text x="180" y="1390" fill="#D2C6BE" font-size="24">Display: Bricolage Grotesque  ·  Body: Barlow  ·  Accent italic: Spectral</text>
+</svg>
