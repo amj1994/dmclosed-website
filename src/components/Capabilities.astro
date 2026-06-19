@@ -1,9 +1,11 @@
 ---
+import Robot from "./Robot.astro";
 // Alternating capability rows — each one shows the AI doing the thing.
 ---
 <section class="caps section" id="capabilities" aria-labelledby="caps-h">
   <div class="container">
     <header class="caps-head">
+      <span class="caps-robot reveal"><Robot variant="think" /></span>
       <p class="kicker reveal">Not a chatbot. A closer.</p>
       <h2 id="caps-h" class="reveal">Chatbots answer questions.<br />DMClosed closes deals.</h2>
     </header>
@@ -62,6 +64,7 @@
 
 <style>
   .caps-head { text-align: center; margin-bottom: clamp(3rem, 1rem + 5vw, 5rem); }
+  .caps-robot { display: block; width: 120px; height: 150px; margin: 0 auto 0.3rem; }
   .caps-head h2 { font-size: var(--step-3); margin-top: 0.8rem; }
 
   .caps-rows { display: grid; gap: clamp(2.5rem, 1rem + 5vw, 5rem); }

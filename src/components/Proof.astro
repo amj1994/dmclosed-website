@@ -1,4 +1,5 @@
 ---
+import Robot from "./Robot.astro";
 // The $40K FueGenix story — real conversation beats, rendered as proof.
 const beats = [
   { from: "lead", text: "If I do this it'd only be with Dr. Munib. But $40k is just not something I can manage.", tag: "Out of budget" },
@@ -18,6 +19,7 @@ const stats = [
   <div class="proof-bg" aria-hidden="true"></div>
   <div class="container proof-grid">
     <div class="proof-copy">
+      <span class="proof-robot reveal"><Robot variant="float" /></span>
       <p class="kicker reveal">A real conversation, start to finish</p>
       <h2 id="proof-h" class="reveal">
         It turned <span class="hl">“out of budget”</span> into a $40,000 customer.
@@ -71,6 +73,7 @@ const stats = [
     display: grid; grid-template-columns: 1fr 1fr;
     gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: center;
   }
+  .proof-robot { display: block; width: 104px; height: 130px; margin-bottom: 0.2rem; }
   .proof-copy h2 { font-size: var(--step-3); margin: 0.8rem 0 1.4rem; }
   .proof-copy h2 .hl { color: var(--accent-hi); }
   .proof-lead { font-size: var(--step-1); color: var(--ink-2); line-height: 1.55; max-width: 42ch; }
