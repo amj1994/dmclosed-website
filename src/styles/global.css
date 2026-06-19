@@ -160,6 +160,11 @@ html.has-motion .reveal.is-in {
   filter: none;
 }
 
+/* chat message pop-ins are gated until the chat animation plays them */
+html.has-motion [data-cmsg],
+html.has-motion [data-chat-booked] { opacity: 0; }
+html.has-motion [data-chat-typing] { display: none !important; }
+
 /* per-word/line split targets stay invisible until choreographed */
 html.has-motion [data-split] > * { opacity: 0; }
 

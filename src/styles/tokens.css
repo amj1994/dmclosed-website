@@ -60,7 +60,7 @@
   --step-5:  clamp(3.3rem, 2.3rem + 5vw, 5.9rem);
 
   /* ---- Space ------------------------------------------ */
-  --space-section: clamp(5rem, 3.5rem + 7vw, 9rem);
+  --space-section: clamp(3rem, 2.2rem + 2.6vw, 4.75rem);
   --container:     min(1240px, 92vw);
   --container-narrow: min(820px, 92vw);
   --radius:        14px;

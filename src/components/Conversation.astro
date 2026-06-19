@@ -1,0 +1,158 @@
+---
+// "It replies. You close." — animated chat that plays as you scroll in.
+const thread = [
+  { from: "in",  text: "Hey 👋 saw your post — how much is the program?" },
+  { from: "out", text: "Great to meet you! It's $4,000 for the 12-week track. What result are you after?" },
+  { from: "in",  text: "Honestly that's a bit more than I planned 😬" },
+  { from: "out", text: "Totally fair — most clients earn it back in month one. Want to see the payment plan?" },
+  { from: "in",  text: "Yeah, go on" },
+  { from: "out", text: "Done ✅ I've got Thu 2pm or Fri 11am open — which suits a quick call?" },
+  { from: "in",  text: "Fri 11 works!" },
+];
+---
+<section class="convo section" id="convo">
+  <div class="convo-bg" aria-hidden="true"></div>
+  <div class="container convo-grid">
+    <div class="convo-copy">
+      <p class="kicker reveal">It replies. You close.</p>
+      <h2 class="convo-h reveal">Every DM answered in seconds — <span class="text-primary">qualified, handled, booked.</span></h2>
+      <p class="lead reveal">Your AI rep gets to work the moment a lead lands: it answers questions, clears objections, and books the call — so your team only ever talks to people who are ready to buy.</p>
+      <ul class="convo-feats reveal">
+        <li><span class="cf-ic">⚡</span> Instant replies, day or night</li>
+        <li><span class="cf-ic">🛡</span> Handles objections naturally</li>
+        <li><span class="cf-ic">📅</span> Books qualified calls 24/7</li>
+        <li><span class="cf-ic">💬</span> Works on Instagram, WhatsApp &amp; SMS</li>
+      </ul>
+      <a href="#pricing" class="btn btn-primary btn-arrow reveal" data-magnetic>
+        Book a demo
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="convo-stage reveal" data-chat>
+      <div class="phone">
+        <div class="phone-top">
+          <span class="phone-avatar">A</span>
+          <div class="phone-id">
+            <strong>Apex Coaching</strong>
+            <span class="phone-status"><span class="dot"></span> AI replying · instant</span>
+          </div>
+          <span class="phone-ch" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+          </span>
+        </div>
+        <div class="phone-thread" data-chat-thread>
+          {thread.map((m) => (
+            <div class={`cmsg cmsg-${m.from}`} data-cmsg><p>{m.text}</p></div>
+          ))}
+          <div class="cmsg cmsg-out typing" data-chat-typing aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+        <div class="phone-foot" aria-hidden="true">
+          <span class="phone-input">Message…</span>
+          <span class="phone-send"><svg viewBox="0 0 24 24" width="15" height="15"><path d="M3 11 21 3l-8 18-2-7-8-3Z" fill="currentColor"/></svg></span>
+        </div>
+      </div>
+      <div class="convo-booked" data-chat-booked>
+        <span class="cb-ic"><svg viewBox="0 0 24 24" width="17" height="17"><path d="M5 12.5 10 17.5 19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><strong>Call booked</strong><span>Fri 11:00 · added to calendar</span></div>
+      </div>
+      <span class="convo-float cf-wa" data-float aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.4A10 10 0 1 0 12 2Z" fill="currentColor"/></svg>
+      </span>
+      <span class="convo-float cf-ig" data-float aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>
+      </span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .convo { position: relative; overflow: clip; }
+  .convo-bg {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(55% 50% at 80% 30%, var(--glow-ember), transparent 70%);
+    opacity: 0.5;
+  }
+  .convo-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 1rem + 4vw, 5rem); align-items: center;
+  }
+  .convo-copy .kicker { margin-bottom: 1.1rem; }
+  .convo-h { font-size: var(--step-3); margin-bottom: 1.2rem; }
+  .convo-copy .lead { max-width: 44ch; margin-bottom: 1.6rem; }
+  .convo-feats { display: grid; gap: 0.7rem; margin-bottom: 1.8rem; }
+  .convo-feats li { display: flex; align-items: center; gap: 0.7rem; color: var(--ink-2); font-weight: 500; }
+  .cf-ic { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--surface-2); border: 1px solid var(--line); font-size: 0.85rem; }
+
+  /* ---- phone ---- */
+  .convo-stage { position: relative; display: grid; place-items: center; }
+  .phone {
+    width: min(370px, 100%);
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line); border-radius: 28px;
+    box-shadow: var(--shadow-lg), 0 0 70px -28px var(--glow-ember);
+    overflow: hidden; position: relative; z-index: 1;
+  }
+  .phone-top {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1rem; border-bottom: 1px solid var(--line-soft);
+    background: oklch(0.18 0.025 45 / 0.6);
+  }
+  .phone-avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 700; color: var(--on-primary);
+    background: linear-gradient(135deg, var(--accent), var(--primary)); }
+  .phone-id { flex: 1; }
+  .phone-id strong { display: block; font-size: 0.92rem; font-family: var(--font-body); }
+  .phone-status { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.74rem; color: var(--success); }
+  .phone-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+  .phone-ch { color: var(--muted); }
+  .phone-thread {
+    padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
+    min-height: 340px; max-height: 340px; overflow: hidden;
+    background: radial-gradient(120% 70% at 50% 0%, oklch(0.13 0.018 45), var(--surface) 70%);
+  }
+  .cmsg { max-width: 82%; padding: 0.6rem 0.85rem; border-radius: 15px; font-size: 0.88rem; line-height: 1.4; }
+  .cmsg p { margin: 0; }
+  .cmsg-in { align-self: flex-start; background: var(--surface-hi); border-bottom-left-radius: 5px; color: var(--ink); }
+  .cmsg-out { align-self: flex-end; color: var(--on-primary); border-bottom-right-radius: 5px;
+    background: linear-gradient(135deg, var(--primary-hi), var(--primary)); }
+  .typing { display: inline-flex; gap: 4px; align-self: flex-end; padding: 0.7rem 0.85rem; background: var(--surface-hi); }
+  .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); animation: cblink 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes cblink { 0%,60%,100%{opacity:0.3; transform:translateY(0)} 30%{opacity:1; transform:translateY(-2px)} }
+  .phone-foot { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 0.85rem; border-top: 1px solid var(--line-soft); background: oklch(0.18 0.025 45 / 0.6); }
+  .phone-input { flex: 1; color: var(--muted); font-size: 0.82rem; padding: 0.45rem 0.8rem; background: var(--bg); border-radius: var(--radius-pill); }
+  .phone-send { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--primary); color: var(--on-primary); }
+
+  .convo-booked {
+    position: absolute; bottom: 6%; right: -4%; z-index: 3;
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.7rem 0.95rem; border-radius: var(--radius);
+    background: oklch(0.16 0.024 45 / 0.92); backdrop-filter: blur(8px);
+    border: 1px solid var(--line); box-shadow: 0 18px 40px -16px oklch(0 0 0 / 0.7);
+  }
+  .cb-ic { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; color: var(--bg); background: var(--success); }
+  .convo-booked strong { display: block; font-size: 0.88rem; font-family: var(--font-body); }
+  .convo-booked span { font-size: 0.75rem; color: var(--muted); }
+
+  .convo-float { position: absolute; z-index: 2; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; color: #fff; box-shadow: 0 14px 30px -12px oklch(0 0 0 / 0.6); }
+  .cf-wa { background: linear-gradient(135deg, #1faa55, #25d366); top: 6%; left: -3%; }
+  .cf-ig { background: linear-gradient(135deg, #b537d6, #fd5d2c); top: 26%; right: -4%; }
+  [data-float] { animation: cfloat 6s ease-in-out infinite; }
+  .cf-ig[data-float] { animation-duration: 7.5s; animation-delay: -2s; }
+  @keyframes cfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+
+  @media (max-width: 900px) {
+    .convo-grid { grid-template-columns: 1fr; }
+    .convo-copy { text-align: center; }
+    .convo-copy .kicker, .convo-feats li { justify-content: center; }
+    .convo-feats { max-width: 22rem; margin-inline: auto; }
+    .convo-copy .lead { margin-inline: auto; }
+    .convo-stage { margin-top: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-float], .typing span { animation: none !important; }
+  }
+</style>

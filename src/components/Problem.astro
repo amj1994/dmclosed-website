@@ -1,58 +1,81 @@
 ---
-// One idea: speed is the whole game. Big animated stat.
+// Speed is the whole game — compact two-column stat + live speed comparison.
 ---
-<section class="problem section" aria-labelledby="problem-h" data-orchestrate>
-  <div class="container-narrow">
-    <p class="kicker reveal">The leak in your funnel</p>
-    <h2 id="problem-h" class="problem-h reveal">
-      <span class="big" data-count data-to="65" data-suffix="%">65%</span>
-      of businesses take over a day to answer a DM.
-    </h2>
-    <p class="problem-sub reveal">
-      By then the lead has messaged three competitors and bought from whoever replied first.
-      You did not lose the sale on price or product. You lost it on silence.
-      DMClosed answers in seconds, every time, on every channel.
-    </p>
-    <div class="problem-bars reveal" aria-hidden="true">
-      <div class="bar">
-        <span class="bar-label">You, replying by hand</span>
-        <span class="bar-track"><span class="bar-fill bar-slow" data-bar></span></span>
-        <span class="bar-val">~14 hrs</span>
+<section class="problem section" aria-labelledby="problem-h">
+  <div class="container problem-grid">
+    <div class="problem-copy">
+      <p class="kicker reveal">The leak in your funnel</p>
+      <h2 id="problem-h" class="problem-h reveal">
+        <span class="big" data-count data-to="65" data-suffix="%">65%</span>
+        of businesses take over a day to answer a DM.
+      </h2>
+      <p class="problem-sub reveal">
+        By then the lead has messaged three competitors and bought from whoever replied first.
+        You didn't lose the sale on price or product — you lost it on silence. DMClosed answers
+        in seconds, every time, on every channel.
+      </p>
+    </div>
+
+    <div class="problem-panel reveal">
+      <span class="panel-tag">Speed to first reply</span>
+      <div class="problem-bars" aria-hidden="true">
+        <div class="bar">
+          <span class="bar-label">You, replying by hand</span>
+          <span class="bar-track"><span class="bar-fill bar-slow" data-bar></span></span>
+          <span class="bar-val">~14 hrs</span>
+        </div>
+        <div class="bar">
+          <span class="bar-label">DMClosed</span>
+          <span class="bar-track"><span class="bar-fill bar-fast" data-bar></span></span>
+          <span class="bar-val">4 sec</span>
+        </div>
       </div>
-      <div class="bar">
-        <span class="bar-label">DMClosed</span>
-        <span class="bar-track"><span class="bar-fill bar-fast" data-bar></span></span>
-        <span class="bar-val">4 sec</span>
-      </div>
+      <p class="panel-note">Leads are <strong>21×</strong> more likely to convert when you reply in the first 5 minutes. DMClosed never misses that window.</p>
     </div>
   </div>
 </section>
 
 <style>
-  .problem { text-align: center; }
-  .problem .kicker { margin-bottom: 1.1rem; }
-  .problem-h { font-size: var(--step-3); line-height: 1.05; margin-bottom: 1.5rem; }
+  .problem-grid {
+    display: grid; grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: center;
+  }
+  .problem-h { font-size: var(--step-3); line-height: 1.04; margin-bottom: 1.1rem; }
+  .problem .kicker { margin-bottom: 1rem; }
   .problem-h .big {
-    display: block; font-size: var(--step-5); color: var(--primary-hi);
-    line-height: 1; margin-bottom: 0.2rem;
+    display: inline-block; font-size: var(--step-5); color: var(--primary-hi);
+    line-height: 0.9; margin-right: 0.3rem; vertical-align: -0.06em;
     font-variant-numeric: tabular-nums;
   }
-  /* the stat lands with a little extra weight when revealed */
   html.has-motion .problem-h .big {
-    transform: scale(0.9); transform-origin: center bottom;
+    transform: scale(0.9); transform-origin: left bottom;
     transition: transform 1.1s var(--ease-out-quint);
   }
   html.has-motion .problem-h.is-in .big { transform: scale(1); }
-  .problem-sub { font-size: var(--step-1); color: var(--ink-2); max-width: 56ch; margin-inline: auto; line-height: 1.55; }
+  .problem-sub { font-size: var(--step-1); color: var(--ink-2); line-height: 1.55; max-width: 46ch; }
 
-  .problem-bars { margin-top: 3rem; display: grid; gap: 1.1rem; max-width: 560px; margin-inline: auto; text-align: left; }
-  .bar { display: grid; grid-template-columns: 1fr; gap: 0.5rem; }
-  .bar-label { font-size: var(--step--1); color: var(--muted); font-weight: 500; }
-  .bar-track { height: 14px; border-radius: var(--radius-pill); background: var(--surface); overflow: hidden; border: 1px solid var(--line-soft); }
+  .problem-panel {
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line); border-radius: var(--radius-lg);
+    padding: clamp(1.4rem, 1rem + 1.5vw, 2.2rem);
+    box-shadow: var(--shadow-md);
+  }
+  .panel-tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+  .problem-bars { display: grid; gap: 1.1rem; margin: 1.2rem 0 1.3rem; }
+  .bar { display: grid; gap: 0.45rem; }
+  .bar-label { font-size: var(--step--1); color: var(--ink-2); font-weight: 500; }
+  .bar-track { height: 14px; border-radius: var(--radius-pill); background: var(--bg); overflow: hidden; border: 1px solid var(--line-soft); }
   .bar-fill { display: block; height: 100%; border-radius: var(--radius-pill); width: 0; }
   .bar-slow { background: linear-gradient(90deg, var(--surface-hi), var(--muted)); }
-  .bar-fast { background: linear-gradient(90deg, var(--primary-strong), var(--accent-strong)); box-shadow: 0 0 18px -2px var(--glow-amber); }
+  .bar-fast { background: linear-gradient(90deg, var(--ember), var(--primary), var(--accent)); box-shadow: 0 0 18px -2px var(--glow-amber); }
   .bar-val { font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); }
   .bar:first-child .bar-val { color: var(--muted); }
   .bar:last-child .bar-val { color: var(--accent-hi); }
+  .panel-note { font-size: 0.92rem; color: var(--muted); line-height: 1.5; padding-top: 1rem; border-top: 1px solid var(--line-soft); }
+  .panel-note strong { color: var(--primary-hi); font-weight: 700; }
+
+  @media (max-width: 860px) {
+    .problem-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .problem-sub { max-width: 56ch; }
+  }
 </style>

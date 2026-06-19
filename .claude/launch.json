@@ -4,8 +4,8 @@
     {
       "name": "dmclosed-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 4321
+      "runtimeArgs": ["run", "dev", "--", "--port", "5050"],
+      "port": 5050
     }
   ]
 }

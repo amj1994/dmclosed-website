@@ -76,6 +76,8 @@ if (reduceMotion) {
   document.querySelectorAll("[data-split] > *, [data-hero]").forEach((el) => { el.style.opacity = "1"; });
   document.querySelectorAll("[data-beat]").forEach((el) => el.classList.add("show"));
   document.querySelectorAll("[data-booked]").forEach((el) => el.classList.add("show"));
+  document.querySelectorAll("[data-cmsg], [data-chat-booked]").forEach((el) => { el.style.opacity = "1"; });
+  document.querySelectorAll("[data-chat-typing]").forEach((el) => { el.style.display = "none"; });
   initNav();
 } else {
   gsap.registerPlugin(ScrollTrigger);
@@ -125,8 +127,8 @@ if (reduceMotion) {
   if (heroVideo) {
     // robot pushes in / comes closer as you scroll from the hero to the next section
     gsap.fromTo(heroVideo,
-      { scale: 1.02, yPercent: 0 },
-      { scale: 1.32, yPercent: 6, ease: "none",
+      { scale: 1.08, yPercent: 0 },
+      { scale: 1.34, yPercent: 6, ease: "none",
         scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 } }
     );
   }
@@ -153,6 +155,43 @@ if (reduceMotion) {
       ScrollTrigger.refresh();
     }, 400)
   );
+
+  /* ---- Chat conversation: messages pop in like a live thread ---- */
+  function initChat() {
+    const stage = document.querySelector("[data-chat]");
+    if (!stage) return;
+    const msgs = [...stage.querySelectorAll("[data-cmsg]")];
+    const typing = stage.querySelector("[data-chat-typing]");
+    const thread = stage.querySelector("[data-chat-thread]");
+    const booked = stage.querySelector("[data-chat-booked]");
+    gsap.set(msgs, { autoAlpha: 0 });
+    if (booked) gsap.set(booked, { autoAlpha: 0, y: 16, scale: 0.9 });
+    const scrollDown = () => { if (thread) thread.scrollTop = thread.scrollHeight; };
+    let played = false;
+    const play = () => {
+      if (played) return; played = true;
+      const tl = gsap.timeline();
+      let gap = 0.25;
+      msgs.forEach((m) => {
+        const out = m.classList.contains("cmsg-out");
+        if (out && typing) {
+          tl.set(typing, { display: "inline-flex" }, `+=${gap}`);
+          tl.add(scrollDown);
+          tl.to({}, { duration: 0.85 });
+          tl.set(typing, { display: "none" });
+          gap = 0.12;
+        } else {
+          tl.to({}, { duration: gap }); gap = 0.55;
+        }
+        tl.fromTo(m, { autoAlpha: 0, y: 14, scale: 0.85 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 0.42, ease: "back.out(1.7)", onStart: scrollDown });
+      });
+      if (booked) tl.fromTo(booked, { autoAlpha: 0, y: 16, scale: 0.9 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, "+=0.35");
+    };
+    ScrollTrigger.create({ trigger: stage, start: "top 72%", once: true, onEnter: play });
+  }
+  initChat();
 
   /* ---- Rotating accent word in the hero headline ---- */
   function initRotator() {
