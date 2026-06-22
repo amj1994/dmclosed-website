@@ -3,8 +3,8 @@ import Robot from "./Robot.astro";
 ---
 <section class="cta section" aria-labelledby="cta-h">
   <div class="cta-glow" aria-hidden="true"></div>
+  <span class="cta-robot"><Robot variant="wave" /></span>
   <div class="container-narrow cta-inner">
-    <span class="cta-robot reveal"><Robot variant="wave" /></span>
     <p class="kicker reveal">Your DMs are open right now</p>
     <h2 id="cta-h" class="cta-h reveal">There are buyers in your inbox<br />going cold as you read this.</h2>
     <p class="cta-sub reveal">Put a closer in there this week. Book a 20-minute demo and we'll show you exactly how DMClosed turns the conversations your team is missing into calls on your calendar.</p>
@@ -32,7 +32,8 @@ import Robot from "./Robot.astro";
   }
   @keyframes ctaPulse { 0%,100%{opacity:0.45; transform:scale(1)} 50%{opacity:0.65; transform:scale(1.05)} }
   .cta-inner { position: relative; z-index: 1; }
-  .cta-robot { display: block; width: 130px; height: 162px; margin: 0 auto 0.5rem; }
+  .cta-robot { position: absolute; top: 12%; right: 6%; width: 116px; height: 145px; z-index: 1; }
+  @media (max-width: 860px) { .cta-robot { display: none; } }
   .cta-h { font-size: var(--step-4); margin: 0.9rem 0 1.3rem; }
   .cta-sub { font-size: var(--step-1); color: var(--ink-2); max-width: 54ch; margin: 0 auto 2rem; line-height: 1.55; }
   .cta-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; margin-bottom: 1.4rem; }

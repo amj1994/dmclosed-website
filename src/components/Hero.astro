@@ -55,13 +55,14 @@
 <style>
   .hero {
     position: relative;
-    min-height: 100svh;
+    min-height: 560px;                 /* small floor only — height follows content */
     display: flex;
     align-items: center;
-    padding-top: clamp(7rem, 6rem + 6vw, 10rem);
-    padding-bottom: var(--space-section);
+    padding-top: clamp(8rem, 6rem + 7vw, 11rem);
+    padding-bottom: clamp(3.5rem, 3rem + 2.5vw, 5.5rem);
     overflow: clip;
-    background: #000;
+    /* fade the hero into the next section so there's no hard seam */
+    background: linear-gradient(180deg, #000 0%, #000 68%, var(--bg) 100%);
   }
 
   /* ---------- full-bleed media (right side) ---------- */
@@ -73,17 +74,16 @@
   }
   .hero-video {
     width: 100%; height: 100%;
-    object-fit: cover; object-position: 50% 42%;
-    transform: scale(1.08);
-    will-change: transform;
+    object-fit: cover; object-position: 50% 46%;   /* push the robot lower to fill the bottom */
+    transform: scale(1.16);
   }
-  /* black gradient on the left + soft vignette so video melts into the text side */
+  /* left fade into the text side + a long, gradual fade so the robot melts seamlessly
+     into the page bottom — no visible empty band, no hard edge */
   .hero-media-fade {
     position: absolute; inset: 0; pointer-events: none;
     background:
       linear-gradient(90deg, #000 0%, rgba(0,0,0,0.78) 16%, rgba(0,0,0,0.18) 42%, transparent 62%),
-      linear-gradient(0deg, #000 0%, transparent 26%),
-      radial-gradient(120% 90% at 78% 38%, transparent 40%, rgba(0,0,0,0.35) 100%);
+      linear-gradient(0deg, var(--bg) 0%, transparent 50%);
   }
 
   /* ---------- copy (left) ---------- */

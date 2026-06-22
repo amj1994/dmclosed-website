@@ -92,6 +92,7 @@ if (reduceMotion) {
   // anchor links through Lenis
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
+      if (a.hasAttribute("data-cal-link")) return; // calendar triggers open the modal, don't scroll
       const id = a.getAttribute("href");
       if (id.length > 1) {
         const targetEl = document.querySelector(id);
@@ -121,17 +122,6 @@ if (reduceMotion) {
     }
   }
   playHeroEntrance();
-
-  /* ---- Hero media parallax: cinematic zoom-out as you leave the hero ---- */
-  const heroVideo = document.querySelector(".hero-video");
-  if (heroVideo) {
-    // robot pushes in / comes closer as you scroll from the hero to the next section
-    gsap.fromTo(heroVideo,
-      { scale: 1.08, yPercent: 0 },
-      { scale: 1.34, yPercent: 6, ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.5 } }
-    );
-  }
 
   /* ---- Apple-style reveals: fade + rise + de-blur, staggered in batches ----
      Elements that enter the viewport together cascade with a small stagger,
@@ -193,6 +183,43 @@ if (reduceMotion) {
   }
   initChat();
 
+  /* ---- Footer robot rises up from behind the ledge ---- */
+  const footerRiser = document.querySelector("[data-footer-riser]");
+  if (footerRiser) {
+    gsap.fromTo(footerRiser,
+      { y: 160, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 1.4, ease: "power3.out",
+        scrollTrigger: { trigger: ".footer", start: "top 95%", once: true } }
+    );
+  }
+
+  /* ---- Scroll parallax: gentle depth drift on tagged elements ---- */
+  document.querySelectorAll("[data-parallax]").forEach((el) => {
+    const amt = parseFloat(el.dataset.parallax) || 40;
+    gsap.fromTo(el, { yPercent: amt * 0.5 }, {
+      yPercent: -amt * 0.5, ease: "none",
+      scrollTrigger: { trigger: el.parentElement || el, start: "top bottom", end: "bottom top", scrub: 0.7 },
+    });
+  });
+
+  /* ---- Dashboard line chart draws itself in ---- */
+  function initChart() {
+    const line = document.querySelector("[data-chart-line]");
+    if (!line) return;
+    const len = line.getTotalLength();
+    gsap.set(line, { strokeDasharray: len, strokeDashoffset: len });
+    const panel = line.closest(".dash-panel") || line;
+    ScrollTrigger.create({
+      trigger: panel, start: "top 78%", once: true,
+      onEnter: () => {
+        gsap.to(line, { strokeDashoffset: 0, duration: 1.7, ease: "power2.inOut" });
+        gsap.to(".dash-area", { opacity: 1, duration: 1.3, ease: "power2.out" });
+        gsap.to(".dash-dots circle", { opacity: 1, duration: 0.4, stagger: 0.18, delay: 0.9 });
+      },
+    });
+  }
+  initChart();
+
   /* ---- Rotating accent word in the hero headline ---- */
   function initRotator() {
     const r = document.querySelector("[data-rotate]");
@@ -240,8 +267,8 @@ if (reduceMotion) {
       onEnter: () => {
         const obj = { v: 0 };
         gsap.to(obj, {
-          v: to, duration: 1.4, ease: "power2.out",
-          onUpdate: () => { el.textContent = Math.round(obj.v) + suffix; },
+          v: to, duration: 1.5, ease: "power2.out",
+          onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString() + suffix; },
         });
       },
     });

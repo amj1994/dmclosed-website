@@ -4,8 +4,8 @@ import Robot from "./Robot.astro";
 ---
 <section class="caps section" id="capabilities" aria-labelledby="caps-h">
   <div class="container">
+    <span class="caps-robot"><Robot variant="think" /></span>
     <header class="caps-head">
-      <span class="caps-robot reveal"><Robot variant="think" /></span>
       <p class="kicker reveal">Not a chatbot. A closer.</p>
       <h2 id="caps-h" class="reveal">Chatbots answer questions.<br />DMClosed closes deals.</h2>
     </header>
@@ -64,7 +64,8 @@ import Robot from "./Robot.astro";
 
 <style>
   .caps-head { text-align: center; margin-bottom: clamp(3rem, 1rem + 5vw, 5rem); }
-  .caps-robot { display: block; width: 120px; height: 150px; margin: 0 auto 0.3rem; }
+  .caps-robot { position: absolute; top: 1.2rem; left: 3%; width: 108px; height: 135px; z-index: 2; }
+  @media (max-width: 760px) { .caps-robot { width: 80px; height: 100px; top: 0.4rem; left: 1%; } }
   .caps-head h2 { font-size: var(--step-3); margin-top: 0.8rem; }
 
   .caps-rows { display: grid; gap: clamp(2.5rem, 1rem + 5vw, 5rem); }

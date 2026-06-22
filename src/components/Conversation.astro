@@ -11,11 +11,13 @@ const thread = [
 ];
 ---
 <section class="convo section" id="convo">
-  <div class="convo-bg" aria-hidden="true"></div>
+  <div class="convo-bg" data-parallax="22" aria-hidden="true"></div>
   <div class="container convo-grid">
     <div class="convo-copy">
       <p class="kicker reveal">It replies. You close.</p>
-      <h2 class="convo-h reveal">Every DM answered in seconds — <span class="text-primary">qualified, handled, booked.</span></h2>
+      <h2 class="convo-h reveal">Every DM answered in seconds
+        <span class="h-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor"/></svg></span>
+        — <span class="text-primary">qualified, handled, booked.</span></h2>
       <p class="lead reveal">Your AI rep gets to work the moment a lead lands: it answers questions, clears objections, and books the call — so your team only ever talks to people who are ready to buy.</p>
       <ul class="convo-feats reveal">
         <li><span class="cf-ic">⚡</span> Instant replies, day or night</li>
@@ -32,13 +34,13 @@ const thread = [
     <div class="convo-stage reveal" data-chat>
       <div class="phone">
         <div class="phone-top">
-          <span class="phone-avatar">A</span>
+          <span class="phone-avatar">J</span>
           <div class="phone-id">
-            <strong>Apex Coaching</strong>
-            <span class="phone-status"><span class="dot"></span> AI replying · instant</span>
+            <strong>Jordan Blake</strong>
+            <span class="phone-status"><span class="dot"></span> Active now</span>
           </div>
-          <span class="phone-ch" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+          <span class="phone-menu" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="5" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="19" cy="12" r="1.7" fill="currentColor"/></svg>
           </span>
         </div>
         <div class="phone-thread" data-chat-thread>
@@ -56,22 +58,19 @@ const thread = [
         <span class="cb-ic"><svg viewBox="0 0 24 24" width="17" height="17"><path d="M5 12.5 10 17.5 19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <div><strong>Call booked</strong><span>Fri 11:00 · added to calendar</span></div>
       </div>
-      <span class="convo-float cf-wa" data-float aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.3-1.4A10 10 0 1 0 12 2Z" fill="currentColor"/></svg>
-      </span>
-      <span class="convo-float cf-ig" data-float aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>
-      </span>
     </div>
   </div>
 </section>
 
 <style>
-  .convo { position: relative; overflow: clip; }
+  .convo { position: relative; overflow: clip; z-index: 1; }
   .convo-bg {
     position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(55% 50% at 80% 30%, var(--glow-ember), transparent 70%);
-    opacity: 0.5;
+    /* glow bleeds from the top-right, continuing the hero robot's light above */
+    background:
+      radial-gradient(58% 60% at 86% -6%, var(--glow-ember), transparent 60%),
+      radial-gradient(40% 40% at 12% 90%, var(--glow-soft), transparent 70%);
+    opacity: 0.62;
   }
   .convo-grid {
     position: relative; z-index: 1;
@@ -105,8 +104,9 @@ const thread = [
   .phone-id { flex: 1; }
   .phone-id strong { display: block; font-size: 0.92rem; font-family: var(--font-body); }
   .phone-status { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.74rem; color: var(--success); }
-  .phone-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
-  .phone-ch { color: var(--muted); }
+  .phone-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 0 var(--success); animation: dotpulse 2.4s infinite; }
+  @keyframes dotpulse { 0%{box-shadow:0 0 0 0 oklch(0.78 0.16 150 / 0.6)} 70%{box-shadow:0 0 0 5px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+  .phone-menu { color: var(--muted); }
   .phone-thread {
     padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
     min-height: 340px; max-height: 340px; overflow: hidden;
@@ -137,13 +137,6 @@ const thread = [
   .convo-booked strong { display: block; font-size: 0.88rem; font-family: var(--font-body); }
   .convo-booked span { font-size: 0.75rem; color: var(--muted); }
 
-  .convo-float { position: absolute; z-index: 2; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; color: #fff; box-shadow: 0 14px 30px -12px oklch(0 0 0 / 0.6); }
-  .cf-wa { background: linear-gradient(135deg, #1faa55, #25d366); top: 6%; left: -3%; }
-  .cf-ig { background: linear-gradient(135deg, #b537d6, #fd5d2c); top: 26%; right: -4%; }
-  [data-float] { animation: cfloat 6s ease-in-out infinite; }
-  .cf-ig[data-float] { animation-duration: 7.5s; animation-delay: -2s; }
-  @keyframes cfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
-
   @media (max-width: 900px) {
     .convo-grid { grid-template-columns: 1fr; }
     .convo-copy { text-align: center; }
@@ -153,6 +146,6 @@ const thread = [
     .convo-stage { margin-top: 1rem; }
   }
   @media (prefers-reduced-motion: reduce) {
-    [data-float], .typing span { animation: none !important; }
+    .typing span, .phone-status .dot { animation: none !important; }
   }
 </style>

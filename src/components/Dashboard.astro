@@ -1,0 +1,143 @@
+---
+// Analytics "visualizer" — live stat tiles + animated line chart + marquee.
+const stats = [
+  { label: "Conversations", to: "1248", suffix: "", delta: "+24%" },
+  { label: "Qualified leads", to: "312", suffix: "", delta: "+28%" },
+  { label: "Calls booked", to: "96", suffix: "", delta: "+32%" },
+  { label: "Revenue", prefix: "$", to: "48600", suffix: "", delta: "+37%" },
+];
+const marquee = [
+  { v: "$40K", l: "deal closed in chat" },
+  { v: "6s", l: "avg. reply time" },
+  { v: "1,248", l: "conversations handled" },
+  { v: "96", l: "calls booked this month" },
+  { v: "+37%", l: "revenue lift" },
+  { v: "312", l: "qualified leads" },
+  { v: "24/7", l: "never clocks out" },
+  { v: "0", l: "leads left on read" },
+];
+---
+<section class="dash section" id="results">
+  <div class="container">
+    <header class="dash-head">
+      <p class="kicker reveal">Proof in the numbers</p>
+      <h2 class="reveal">
+        Watch the numbers
+        <span class="h-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 17l5-6 4 4 5-7 4 5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        climb.
+      </h2>
+      <p class="lead reveal">Every conversation is tracked, scored, and improved. You see exactly what's working — and the line keeps going up.</p>
+    </header>
+
+    <div class="dash-panel reveal">
+      <div class="dash-top">
+        <span class="dash-title">Performance overview</span>
+        <span class="dash-live"><span class="lv"></span> Live · last 30 days</span>
+      </div>
+      <div class="dash-stats">
+        {stats.map((s) => (
+          <div class="dstat">
+            <span class="dstat-l">{s.label}</span>
+            <span class="dstat-v">{s.prefix || ""}<span data-count data-to={s.to} data-suffix={s.suffix}>{s.to}</span></span>
+            <span class="dstat-d">▲ {s.delta}</span>
+          </div>
+        ))}
+      </div>
+      <div class="dash-chart" aria-hidden="true">
+        <svg viewBox="0 0 640 200" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="dashfill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--primary)" stop-opacity="0.42"/>
+              <stop offset="1" stop-color="var(--primary)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g class="dgrid" stroke="var(--line-soft)" stroke-width="1">
+            <line x1="0" y1="50" x2="640" y2="50"/><line x1="0" y1="100" x2="640" y2="100"/><line x1="0" y1="150" x2="640" y2="150"/>
+          </g>
+          <path class="dash-area" d="M0,162 L91,126 L183,142 L274,92 L366,116 L457,58 L549,84 L640,34 L640,200 L0,200 Z" fill="url(#dashfill)"/>
+          <path class="dash-line" data-chart-line d="M0,162 L91,126 L183,142 L274,92 L366,116 L457,58 L549,84 L640,34" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <g class="dash-dots" fill="var(--primary-hi)">
+            <circle cx="91" cy="126" r="4"/><circle cx="274" cy="92" r="4"/><circle cx="457" cy="58" r="4"/><circle cx="640" cy="34" r="5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- marquee of result cards, drifting right → left -->
+  <div class="marquee" data-marquee>
+    <div class="marquee-track">
+      {[...marquee, ...marquee].map((m) => (
+        <div class="mcard">
+          <span class="mcard-v">{m.v}</span>
+          <span class="mcard-l">{m.l}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .dash { overflow: clip; }
+  .dash-head { text-align: center; margin-bottom: clamp(2rem, 1rem + 3vw, 3.2rem); }
+  .dash-head h2 { font-size: var(--step-3); margin: 0.7rem 0 1rem; }
+  .dash-head .lead { max-width: 56ch; margin-inline: auto; }
+
+  /* inline heading icon badge */
+  .h-ic {
+    display: inline-grid; place-items: center; vertical-align: -0.18em;
+    width: 1.1em; height: 1.1em; margin: 0 0.06em;
+    border-radius: 0.3em; color: var(--on-primary);
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    box-shadow: 0 6px 18px -6px var(--glow-ember);
+  }
+  .h-ic svg { width: 72%; height: 72%; }
+
+  .dash-panel {
+    max-width: 1000px; margin-inline: auto;
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line); border-radius: var(--radius-lg);
+    padding: clamp(1.2rem, 0.8rem + 1.5vw, 1.9rem);
+    box-shadow: var(--shadow-lg), 0 0 80px -40px var(--glow-ember);
+  }
+  .dash-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+  .dash-title { font-family: var(--font-display); font-weight: 700; font-size: var(--step-1); }
+  .dash-live { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; color: var(--muted); }
+  .dash-live .lv { width: 8px; height: 8px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 0 var(--success); animation: dlv 2.2s infinite; }
+  @keyframes dlv { 0%{box-shadow:0 0 0 0 oklch(0.78 0.16 150 / 0.6)} 70%{box-shadow:0 0 0 6px transparent} 100%{box-shadow:0 0 0 0 transparent} }
+
+  .dash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; margin-bottom: 1.4rem; }
+  .dstat { background: var(--bg); border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 0.9rem 1rem; }
+  .dstat-l { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.3rem; }
+  .dstat-v { display: block; font-family: var(--font-display); font-weight: 800; font-size: var(--step-2); line-height: 1; font-variant-numeric: tabular-nums; }
+  .dstat-d { display: inline-block; margin-top: 0.4rem; font-size: 0.74rem; font-weight: 700; color: var(--success); }
+
+  .dash-chart { height: clamp(140px, 12vw, 190px); }
+  .dash-chart svg { width: 100%; height: 100%; overflow: visible; }
+  .dash-area { opacity: 0; }
+  .dash-dots circle { opacity: 0; filter: drop-shadow(0 0 6px var(--glow-primary)); }
+  html.has-motion .dash-line { stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+  @media (max-width: 720px) { .dash-stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---- marquee ---- */
+  .marquee { margin-top: clamp(2rem, 1rem + 3vw, 3.5rem); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .marquee-track { display: flex; gap: 1rem; width: max-content; animation: marq 38s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marq { to { transform: translateX(-50%); } }
+  .mcard {
+    display: flex; align-items: baseline; gap: 0.6rem; white-space: nowrap;
+    padding: 0.85rem 1.3rem; border-radius: var(--radius-pill);
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border: 1px solid var(--line);
+  }
+  .mcard-v { font-family: var(--font-display); font-weight: 800; font-size: var(--step-1); color: var(--primary-hi); }
+  .mcard-l { color: var(--ink-2); font-size: var(--step-0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .dash-live .lv { animation: none; }
+    html.has-motion .dash-line { stroke-dasharray: none; stroke-dashoffset: 0; }
+    .dash-area, .dash-dots circle { opacity: 1; }
+  }
+</style>

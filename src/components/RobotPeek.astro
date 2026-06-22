@@ -1,0 +1,127 @@
+---
+// Big glossy robot peeking over a ledge — head + detailed gripping hands.
+const uid = "p" + Math.random().toString(36).slice(2, 8);
+---
+<div class="peek" data-peek aria-hidden="true">
+  <svg viewBox="0 0 440 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id={`pshell-${uid}`} x1="0.25" y1="0" x2="0.75" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="0.5" stop-color="#e7e9ee"/>
+        <stop offset="1" stop-color="#b8bcc6"/>
+      </linearGradient>
+      <linearGradient id={`pear-${uid}`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#FFC061"/>
+        <stop offset="1" stop-color="#E2391F"/>
+      </linearGradient>
+      <radialGradient id={`pvisor-${uid}`} cx="0.5" cy="0.3" r="0.9">
+        <stop offset="0" stop-color="#3a2418"/>
+        <stop offset="0.45" stop-color="#160b06"/>
+        <stop offset="1" stop-color="#050302"/>
+      </radialGradient>
+      <radialGradient id={`peye-${uid}`} cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="#FFEFD0"/>
+        <stop offset="0.45" stop-color="#FFA63A"/>
+        <stop offset="1" stop-color="#E2391F"/>
+      </radialGradient>
+      <linearGradient id={`pjoint-${uid}`} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3a3d45"/>
+        <stop offset="1" stop-color="#15171c"/>
+      </linearGradient>
+      <filter id={`prim-${uid}`} x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="10" result="b"/>
+        <feMerge><feMergeNode in="b"/></feMerge>
+      </filter>
+      <filter id={`pglow-${uid}`} x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="4" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- orange rim back-glow -->
+    <ellipse class="p-rim" cx="220" cy="120" rx="150" ry="120" fill="#E2391F" opacity="0.55" filter={`url(#prim-${uid})`}/>
+
+    <!-- hands gripping the ledge — chunky segmented fingers draping over -->
+    <g class="p-hands">
+      <g class="p-hand p-hand-l">
+        <!-- palm/knuckle base -->
+        <rect x="78" y="196" width="116" height="34" rx="16" fill={`url(#pshell-${uid})`} stroke="#aeb2bc" stroke-width="1.6"/>
+        {[0,1,2].map((i) => (
+          <g transform={`translate(${84 + i*34}, ${212 - (i===1?7:0)}) rotate(${(i-1)*8})`}>
+            <rect x="0" y="0" width="27" height="64" rx="13.5" fill={`url(#pshell-${uid})`} stroke="#aeb2bc" stroke-width="1.5"/>
+            <rect x="0" y="24" width="27" height="11" fill={`url(#pjoint-${uid})`} opacity="0.92"/>
+            <rect x="0" y="45" width="27" height="9" rx="4" fill={`url(#pjoint-${uid})`} opacity="0.75"/>
+          </g>
+        ))}
+      </g>
+      <g class="p-hand p-hand-r">
+        <rect x="246" y="196" width="116" height="34" rx="16" fill={`url(#pshell-${uid})`} stroke="#aeb2bc" stroke-width="1.6"/>
+        {[0,1,2].map((i) => (
+          <g transform={`translate(${252 + i*34}, ${212 - (i===1?7:0)}) rotate(${(i-1)*8})`}>
+            <rect x="0" y="0" width="27" height="64" rx="13.5" fill={`url(#pshell-${uid})`} stroke="#aeb2bc" stroke-width="1.5"/>
+            <rect x="0" y="24" width="27" height="11" fill={`url(#pjoint-${uid})`} opacity="0.92"/>
+            <rect x="0" y="45" width="27" height="9" rx="4" fill={`url(#pjoint-${uid})`} opacity="0.75"/>
+          </g>
+        ))}
+      </g>
+    </g>
+
+    <!-- head -->
+    <g class="p-head">
+      <!-- ears -->
+      <g>
+        <rect x="66" y="104" width="30" height="74" rx="15" fill={`url(#pear-${uid})`} filter={`url(#pglow-${uid})`}/>
+        <rect x="74" y="118" width="5" height="46" rx="2.5" fill="#7a1c0d" opacity="0.5"/>
+      </g>
+      <g>
+        <rect x="344" y="104" width="30" height="74" rx="15" fill={`url(#pear-${uid})`} filter={`url(#pglow-${uid})`}/>
+        <rect x="361" y="118" width="5" height="46" rx="2.5" fill="#7a1c0d" opacity="0.5"/>
+      </g>
+      <!-- shell -->
+      <rect x="84" y="26" width="272" height="208" rx="98" fill={`url(#pshell-${uid})`} stroke="#b1b5bf" stroke-width="2"/>
+      <!-- seam lines -->
+      <path d="M220 28 V58 M120 150 H100 M340 150 H320" stroke="#c7cad2" stroke-width="2" stroke-linecap="round"/>
+      <!-- glossy black visor -->
+      <rect x="112" y="56" width="216" height="150" rx="74" fill={`url(#pvisor-${uid})`}/>
+      <rect x="112" y="56" width="216" height="150" rx="74" fill="none" stroke="#FF8C25" stroke-width="2.5" opacity="0.5"/>
+      <!-- glossy reflection -->
+      <ellipse cx="180" cy="86" rx="62" ry="26" fill="#ffffff" opacity="0.10"/>
+      <!-- eyes + smile -->
+      <g filter={`url(#pglow-${uid})`} fill={`url(#peye-${uid})`}>
+        <ellipse class="p-eye p-eye-l" cx="186" cy="118" rx="19" ry="25"/>
+        <ellipse class="p-eye p-eye-r" cx="254" cy="118" rx="19" ry="25"/>
+      </g>
+      <path class="p-smile" d="M178 150 Q220 188 262 150" stroke={`url(#peye-${uid})`} stroke-width="8" stroke-linecap="round" fill="none" filter={`url(#pglow-${uid})`}/>
+      <!-- top shell highlight -->
+      <ellipse cx="160" cy="50" rx="44" ry="14" fill="#ffffff" opacity="0.5"/>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .peek { display: block; width: 100%; height: 100%; }
+  .peek svg { width: 100%; height: 100%; overflow: visible; }
+
+  /* gentle idle bob once it has risen */
+  .p-head, .p-hands { transform-box: fill-box; }
+  .peek svg { animation: peekBob 4.5s ease-in-out infinite; }
+  @keyframes peekBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+  /* blinking eyes */
+  .p-eye { transform-box: fill-box; transform-origin: center; animation: peekBlink 4s infinite; }
+  @keyframes peekBlink { 0%,90%,100% { transform: scaleY(1); } 94%,97% { transform: scaleY(0.08); } }
+
+  /* rim glow breathes */
+  .p-rim { transform-box: fill-box; transform-origin: center; animation: peekRim 5s ease-in-out infinite; }
+  @keyframes peekRim { 0%,100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 0.62; transform: scale(1.05); } }
+
+  /* hands tap the ledge */
+  .p-hand-l { transform-box: fill-box; transform-origin: 50% 100%; animation: handL 3.4s ease-in-out infinite; }
+  .p-hand-r { transform-box: fill-box; transform-origin: 50% 100%; animation: handR 3.4s ease-in-out infinite; }
+  @keyframes handL { 0%,100% { transform: translateY(0) rotate(0deg); } 45% { transform: translateY(-3px) rotate(-2deg); } }
+  @keyframes handR { 0%,100% { transform: translateY(0) rotate(0deg); } 65% { transform: translateY(-3px) rotate(2deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .peek svg, .p-eye, .p-rim, .p-hand-l, .p-hand-r { animation: none !important; }
+  }
+</style>
