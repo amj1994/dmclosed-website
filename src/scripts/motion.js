@@ -6,6 +6,36 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 const finePointer = window.matchMedia("(pointer: fine)").matches;
 
 /* ------------------------------------------------------------------
+   Hero robot video — robust autoplay (mobile/iOS friendly).
+   Runs regardless of reduced-motion so the hero is never frozen.
+------------------------------------------------------------------ */
+(function initRobotVideo() {
+  const v = document.querySelector("[data-robot]");
+  if (!v) return;
+  v.muted = true;          // required for autoplay; set as a property, not just attribute
+  v.defaultMuted = true;
+  v.playsInline = true;
+  v.setAttribute("muted", "");
+  const tryPlay = () => { try { const p = v.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {} };
+  tryPlay();
+  ["loadeddata", "canplay", "canplaythrough"].forEach((ev) => v.addEventListener(ev, tryPlay, { once: true }));
+  // iOS Low-Power / strict autoplay: kick it off on the first user interaction
+  const onFirst = () => {
+    tryPlay();
+    ["touchstart", "pointerdown", "click", "scroll"].forEach((ev) => window.removeEventListener(ev, onFirst));
+  };
+  ["touchstart", "pointerdown", "click", "scroll"].forEach((ev) =>
+    window.addEventListener(ev, onFirst, { passive: true })
+  );
+  // resume when it scrolls back into view; pause when far offscreen (battery)
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) tryPlay(); else v.pause(); }, { threshold: 0 }).observe(v);
+  }
+  // if the tab was backgrounded during load, resume on return
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) tryPlay(); });
+})();
+
+/* ------------------------------------------------------------------
    Nav: scrolled state + mobile toggle
 ------------------------------------------------------------------ */
 function initNav() {
@@ -311,16 +341,7 @@ if (reduceMotion) {
     });
   }
 
-  /* ---- Robot video: pause when far offscreen to save battery ---- */
-  const robot = document.querySelector("[data-robot]");
-  if (robot) {
-    const play = () => { robot.play && robot.play().catch(() => {}); };
-    play();
-    new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) play();
-      else robot.pause && robot.pause();
-    }, { threshold: 0 }).observe(robot);
-  }
+  /* (hero robot video autoplay is handled globally at the top — initRobotVideo) */
 
   initNav();
   initMagnetic();
