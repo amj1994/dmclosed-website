@@ -7,7 +7,6 @@
 @import "@fontsource/barlow/700.css";
 /* Spectral — elegant serif italic, used only for display accents */
 @import "@fontsource/spectral/500-italic.css";
-@import "@fontsource/spectral/600-italic.css";
 
 @import "./tokens.css";
 
